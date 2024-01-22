@@ -12,7 +12,6 @@
 
 .header {
   background: #0099cc none;
-  float: left;
   height: 115px;
   position: relative;
   width: 100%;
@@ -49,4 +48,39 @@
   height: 85px;
   margin: 20px 25px 0;
   width: 400px;
+}
+
+/*Breadscrub*/
+.breadcrumbs {
+  background: #fff url(../public/images/bg-breadcrumb.png) repeat-x;
+  text-indent: 10px;
+  padding: 10px 0 4px;
+  width: 100%;
+  border-bottom: 1px solid #aaa;
+}
+
+.breadcrumbsMain {
+  margin: auto;
+  width: 820px;
+}
+
+.breadcrumbs ul {
+  background: url(../public/images/icon-home.png) no-repeat;
+  margin-left: 30px;
+  padding-left: 15px;
+  /* width: 820px; */
+}
+
+.breadcrumbs li {
+  display: inline;
+  font-size: 1.2em;
+  list-style-type: none;
+  margin-right: 3px;
+}
+
+.breadcrumbs a:link, .breadcrumbs a:visited {
+  background: url(../public/images/arrow-breadcrumb.gif) no-repeat right .4em;
+  color: #666;
+  padding-right: 10px;
+  text-decoration: underline;
 }
