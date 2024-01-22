@@ -1,7 +1,52 @@
+.mainHeader {
+  background: #0099cc;
+
+}
+
+.pageWrapper {
+  background: #fff repeat-y 163px 0;
+  margin: auto;
+  position: relative;
+  width: 820px;
+}
+
 .header {
   background: #0099cc none;
   float: left;
   height: 115px;
   position: relative;
   width: 100%;
+}
+
+.header ul {
+  bottom: 15px;
+  font-size: 1.2em;
+  position: absolute;
+  right: 10px;
+}
+
+.header ul li {
+  float: left;
+  list-style: none none;
+  margin-right: 15px;
+}
+
+.header a, .header a:link, .header a:visited {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.hidden {
+  margin: -9999px;
+  position: absolute;
+}
+
+.logo {
+  background: transparent url(../public/images/logo-immigrationNZ.gif) no-repeat;
+  display: block;
+  float: left;
+  height: 85px;
+  margin: 20px 25px 0;
+  width: 400px;
 }
