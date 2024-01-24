@@ -66,7 +66,6 @@ export default function InnerContainer() {
           <a
             id="innerContainer_mainContent_HelpLink1"
             href="https://www.immigration.govt.nz/formshelp/visaview/vvs-search-tips"
-            onclick="window.open('https://www.immigration.govt.nz/formshelp/visaview/vvs-search-tips','eespopup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=720,height=520,left=50,top=50'); return false;"
             style={{ position: "absolute", marginLeft: "220px" }}
           >
             Can't find your visa?
@@ -419,6 +418,20 @@ export default function InnerContainer() {
               </label>
             </div>
           </fieldset>
+          <div className={styles.buttons}>
+            <div>
+              <span className={styles.btnCorner1}></span>
+              <input
+                type="submit"
+                name="ctl00$ctl00$innerContainer$mainContent$CheckButton"
+                value="Check Visa"
+                id="innerContainer_mainContent_CheckButton"
+                tabindex="11"
+              />
+              <span className={styles.btnCorner2}></span>
+              <div id="progressBar"></div>
+            </div>
+          </div>
         </form>
       </div>
     </div>
