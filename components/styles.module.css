@@ -212,3 +212,129 @@
   margin-bottom: 5px;
 }
 
+/* Footer */
+
+.footer {
+  background: #e6e6e6 url(../public/images/bg-shadow-footer.png) repeat-y;
+  clear: both;
+  height: 34px;
+  padding: 0 19px;
+  width: 820px;
+  margin: auto;
+}
+
+.footer ul {
+  border: 1px solid #bbb;
+  border-width: 1px 0;
+  float: left;
+  padding-top: 10px;
+  width: 782px;
+}
+
+.footer li {
+  float: left;
+  font-size: 1.1em;
+  line-height: .7;
+  list-style: none;
+  padding-bottom: 10px;
+}
+
+li.last, li.last a, li.last a:link, li.last a:visited {
+  border: 0;
+}
+
+.footer a, .footer a:link, .footer a:visited {
+  color: #4d4d4d;
+  /* padding: 0 5px; */
+  text-decoration: none;
+}
+
+.footer img {
+  margin: -18px 7px 0;
+}
+
+.footer .pdlft5 {
+  padding-left: 5px;
+}
+
+.footer .pdrt5 {
+  padding-right: 5px;
+}
+
+/* form */
+
+.form {
+  float: left;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.form legend {
+  margin: -9999px;
+  position: absolute;
+}
+
+.form div {
+  float: left;
+  padding-bottom: .5em;
+  width: 100%;
+}
+
+.form label, .form span.fauxLabel {
+  color: #333;
+  display: inline-block;
+  padding: .2em 0 .2em 2em;
+  width: 14em;
+}
+
+.form label span, .form .fauxLabel span, span.mandatory {
+  color: #ff0000;
+  float: none;
+  padding-left: .25em;
+}
+
+.form input {
+  margin-right: .25em;
+  width: 18em;
+  border: 1px solid #aaa;
+  padding: 3px;
+  border-radius: 2px;
+}
+
+.hasButton label, .hasButton select {
+  float: left;
+}
+
+.form select {
+  width: 18em;
+  border: 1px solid #aaa;
+  padding: 3px;
+  border-radius: 2px;
+}
+
+.form input.medium {
+  width: 8.5em;
+  height: 20px;
+}
+
+.form .dob {
+  display: flex;
+}
+
+.form select.small {
+  width: 8.5em;
+}
+
+.visaconsent {
+  margin-top: 15px;
+}
+
+.visaconsent input {
+  width: 15px;
+  margin-left: 10px;
+}
+
+.visaconsent label {
+  width: 280px;
+  padding: 0px;
+}
