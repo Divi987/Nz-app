@@ -5,7 +5,7 @@ export default function Header() {
   return (
     <div className={styles.header}>
       <Link className={styles.logo} href="http://www.immigration.govt.nz/">
-        <span class="hidden">Immigration New Zealand</span>
+        <span className="hidden">Immigration New Zealand</span>
       </Link>
       <ul>
         <li>
