@@ -8,8 +8,8 @@ generator client {
 }
 
 model User {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  loginName    String?
+  id String   @id @default(auto()) @map("_id") @db.ObjectId
+  loginName String?
   familyName String
   firstName String
   dob String

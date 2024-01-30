@@ -1,6 +1,11 @@
-const { PrismaClient } = require('@prisma/client')
+//const { PrismaClient } = require('@prisma/client')
 
-const prisma = new PrismaClient()
+
+import { PrismaClient } from "@prisma/client";
+
+export const prisma = new PrismaClient()
+
+
 
 export const createUserData = async (loginName, familyName, dob, gender, visaType, visaStartDate, firstEntryBefore, passportNationality, passportNumber, clientNumber, visaExpiryDate, numberOfEntries, expirtyDate, pdfLink) => {
   const user = await prisma.user.create({
@@ -34,7 +39,7 @@ export const getUserData = async (id) => {
 }
 
 export const getAllUser = async () => {
-  const users = await prisma.user.findMany()
+  const users = await prisma.User.findMany()
   return users;
 }
 

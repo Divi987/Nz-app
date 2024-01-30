@@ -3,23 +3,33 @@
 import Link from "next/link";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import { atom, useRecoilState } from "recoil";
+import { atom, selector, useSetRecoilState } from "recoil";
 import { useRef } from "react";
 
 export const userState = atom({
   key: 'userState',
-  default: {}
+  default: []
+})
+
+export const userStateSelector = selector({
+  key: 'userStateSelector',
+  get: ({get}) => get(userState)
 })
 
 export default function Form(){
 
   const familyNameControl = useRef();
-  const [user, setUser] = useRecoilState(userState)
+  const  nationalityControl = useRef();
+  const setUser = useSetRecoilState(userState)
 
+  
   const handleSubmit = (e) => {
       e.preventDefault();
     const familyNameControls = familyNameControl.current.value;
-    console.log("1" + familyNameControls)
+    const nationalityControls = nationalityControl.current.value;
+    setUser([familyNameControls, nationalityControls]);
+    console.log(setUser);
+    console.log("1" + familyNameControls + " " + nationalityControls)
   }
 
   return (
@@ -28,7 +38,7 @@ export default function Form(){
           <fieldset className={styles.form}>
             <legend>Visa Verification Enquiry</legend>
             <div>
-              <label for="innerContainer_mainContent_FamilyNameControl">
+              <label C="innerContainer_mainContent_FamilyNameControl">
                 Family Name<span>*</span>
               </label>
               <input
@@ -42,13 +52,14 @@ export default function Form(){
             </div>
 
             <div className={styles.hasButton}>
-              <label for="innerContainer_mainContent_NationalityControl">
+              <label htmlFor="innerContainer_mainContent_NationalityControl">
                 Passport Nationality<span>*</span>
               </label>
               <select
                 name="ctl00$ctl00$innerContainer$mainContent$NationalityControl"
                 id="innerContainer_mainContent_NationalityControl"
                 tabIndex="2"
+                ref={nationalityControl}
               >
                 <option value=""></option>
                 <option value="1">Afghanistan</option>
@@ -277,7 +288,7 @@ export default function Form(){
             </div>
 
             <div>
-              <label for="innerContainer_mainContent_PassportNumberControl">
+              <label htmlFor="innerContainer_mainContent_PassportNumberControl">
                 Passport Number<span>*</span>
               </label>
               <input
@@ -291,7 +302,7 @@ export default function Form(){
             </div>
 
             <div className={styles.dob}>
-              <label for="innerContainer_mainContent_DateOfBirthControl">
+              <label htmlFor="innerContainer_mainContent_DateOfBirthControl">
                 Date of Birth <br /> dd/mm/yy<span>*</span>
               </label>
               <input
@@ -313,7 +324,7 @@ export default function Form(){
             </div>
 
             <div>
-              <label for="innerContainer_mainContent_GenderControl">
+              <label htmlFor="innerContainer_mainContent_GenderControl">
                 Gender<span>*</span>
               </label>
               <select
@@ -329,7 +340,7 @@ export default function Form(){
             </div>
 
             <div className={styles.dob}>
-              <label for="innerContainer_mainContent_VisaStartDateControl">
+              <label htmlFor="innerContainer_mainContent_VisaStartDateControl">
                 Visa Start Date
                 <br /> dd/mm/yy<span>*</span>
               </label>
@@ -359,7 +370,7 @@ export default function Form(){
                 name="ctl00$ctl00$innerContainer$mainContent$chkVisaConsent"
                 tabIndex="8"
               />
-              <label for="innerContainer_mainContent_chkVisaConsent">
+              <label htmlFor="innerContainer_mainContent_chkVisaConsent">
                 The visa holder has consented to this check.
               </label>
             </div>
