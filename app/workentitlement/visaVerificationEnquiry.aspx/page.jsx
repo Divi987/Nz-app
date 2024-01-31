@@ -8,7 +8,7 @@ export const metadata = {
   title: "Visa Verification Enquiry",
 };
 
-export default function VisaVerificationEnquiry() {
+export default function VisaVerificationEnquiry({ params}) {
   return (
     <>
     

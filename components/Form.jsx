@@ -5,10 +5,11 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import { atom, selector, useSetRecoilState } from "recoil";
 import { useRef } from "react";
+import { useRouter } from "next/navigation";
 
 export const userState = atom({
   key: 'userState',
-  default: []
+  default: {}
 })
 
 export const userStateSelector = selector({
@@ -21,15 +22,23 @@ export default function Form(){
   const familyNameControl = useRef();
   const  nationalityControl = useRef();
   const setUser = useSetRecoilState(userState)
-
+  let router = useRouter()
   
-  const handleSubmit = (e) => {
-      e.preventDefault();
+  
+  const  handleSubmit = async (e) => {
+    e.preventDefault();
     const familyNameControls = familyNameControl.current.value;
     const nationalityControls = nationalityControl.current.value;
-    setUser([familyNameControls, nationalityControls]);
-    console.log(setUser);
-    console.log("1" + familyNameControls + " " + nationalityControls)
+    const fetchAllData = await fetch('http://127.0.0.1:3000/api/users', {
+      mode: 'cors',
+      'Access-Control-Allow-Origin': '*'
+    })
+    const data = await fetchAllData.json()
+    console.log(data.user);
+    setUser(data.user);
+    router.push('/workentitlement/visaVerificationEnquiry.aspx/historyId')
+    //console.log(setUser);
+    //console.log("1" + familyNameControls + " " + nationalityControls)
   }
 
   return (
