@@ -19,7 +19,7 @@ model User {
   firstEntryBefore String
   passportNationality String
   passportNumber String
-  clientNumber String
+  clientNumber String @unique
   visaExpiryDate String
   numberOfEntries String
   expirtyDate String
