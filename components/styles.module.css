@@ -212,6 +212,21 @@
   margin-bottom: 5px;
 }
 
+.content h2 {
+    float: left;
+    font-size: 1em;
+    margin: 1em 0 .5em;
+    width: 100%;
+    font-weight: 700;
+}
+
+.content p
+{
+  clear: both;
+  margin-bottom: 1em;
+  position: relative;
+}
+
 /* Footer */
 
 .footer {
@@ -347,6 +362,50 @@ li.last, li.last a, li.last a:link, li.last a:visited {
 }
 
 .buttons input {
+  border-style: none;
+  border-color: inherit;
+  border-width: 0;
+  background-color: #0099cc;
+  color: #fff;
+  cursor: pointer;
+  float: left;
+  font: bold 1em verdana;
+  padding: 5px 7px;
+  overflow: visible;
+  width: auto;
+  margin-left: 5px;
+  margin-right: 0;
+  margin-top: 0;
+}
+
+.form .column
+{
+  float: left;
+  width: 45%;
+}
+
+.form span
+{
+  color: #336699;
+  float: left;
+  padding: .2em 0;
+}
+
+.column span
+{
+  width: 10em;
+}
+
+.buttons
+{
+  float: left;
+  height: 26px;
+  margin: 2em 0;
+  width: 100%;
+}
+
+.buttons input
+{
   border-style: none;
   border-color: inherit;
   border-width: 0;
