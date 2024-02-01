@@ -6,11 +6,12 @@ import Header from "@/components/Header";
 import styles from '../../../../components/styles.module.css'
 import Footer from '@/components/Footer';
 import { useRecoilValue } from "recoil";
+import InnerContainerDetails from "@/components/InnerContainerDetails";
 
 export default function Page() {
   //const id = user.id;
   const value = useRecoilValue(userStateSelector);
-  console.log(value);
+
   return (
     <>
       <div className={styles.mainHeader}>
@@ -20,7 +21,7 @@ export default function Page() {
         <Breadcrumb />
       </div>
       <div className={styles.mainInnerContainer}>
-        
+      <InnerContainerDetails />
       </div>
       <Footer />
     </>

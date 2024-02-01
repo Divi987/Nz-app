@@ -5,11 +5,11 @@ export const dynamic = 'force-dynamic';
 export async function GET(request, { params }){
   try {
 
-      const { clientNumber }  = params;
+      const { passportNumber }  = params;
   
       const user = await prisma.User.findFirst({
           where: {
-            clientNumber
+            passportNumber
           }
       });
   

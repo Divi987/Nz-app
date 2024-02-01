@@ -6,6 +6,8 @@ import Image from "next/image";
 import { atom, selector, useSetRecoilState } from "recoil";
 import { useRef } from "react";
 import { useRouter } from "next/navigation";
+import { createCookies } from "@/app/action";
+import { setCookie } from "cookies-next";
 
 export const userState = atom({
   key: 'userState',
@@ -21,6 +23,7 @@ export default function Form(){
 
   const familyNameControl = useRef();
   const  nationalityControl = useRef();
+  const passportNumber = useRef();
   const setUser = useSetRecoilState(userState)
   let router = useRouter()
   
@@ -29,16 +32,17 @@ export default function Form(){
     e.preventDefault();
     const familyNameControls = familyNameControl.current.value;
     const nationalityControls = nationalityControl.current.value;
-    const fetchAllData = await fetch('http://127.0.0.1:3000/api/users', {
-      mode: 'cors',
-      'Access-Control-Allow-Origin': '*'
-    })
-    const data = await fetchAllData.json()
-    console.log(data.user);
-    setUser(data.user);
+    const passportNumbers = passportNumber.current.value;
+    //const fetchAllData = await fetch('http://127.0.0.1:3000/api/users', {
+    //  mode: 'cors',
+    //  'Access-Control-Allow-Origin': '*'
+    //})
+    //const data = await fetchAllData.json()
+    //console.log(data.user);
+    //setUser(data.user);
+    setCookie("cookieKey",passportNumbers);
+    createCookies(passportNumbers)
     router.push('/workentitlement/visaVerificationEnquiry.aspx/historyId')
-    //console.log(setUser);
-    //console.log("1" + familyNameControls + " " + nationalityControls)
   }
 
   return (
@@ -307,6 +311,7 @@ export default function Form(){
                 id="innerContainer_mainContent_PassportNumberControl"
                 tabIndex="3"
                 className={styles.medium}
+                ref={passportNumber}
               />
             </div>
 
