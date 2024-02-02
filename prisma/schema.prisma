@@ -22,7 +22,9 @@ model User {
   clientNumber String @unique
   visaExpiryDate String
   numberOfEntries String
-  expirtyDate String
+  expiryDate String
   pdfLink String?
+  enquiryDate String?
+  validAsAt String?
   createdAt DateTime @default(now())
 }
