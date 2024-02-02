@@ -1,9 +1,67 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import Form from "./Form";
+import Form, { userState } from "./Form";
+import { useState } from "react";
+import { createCookies } from "@/app/action";
+import { setCookie } from "cookies-next";
+import { fetcher } from "@/app/fetcher";
+import useSWR from "swr";
+import { useSetRecoilState } from "recoil";
+import { useRouter } from "next/navigation";
 
 export default function InnerContainer() {
+  const [message, setMessage] = useState("");
+  const [shouldFetch, setShouldFetch] = useState(false);
+  const [passportNumber, SetPassportNumber] = useState(null);
+  const setUsers = useSetRecoilState(userState);
+  let router = useRouter();
+
+  const { data, error, isLoading } = useSWR(
+    shouldFetch ? `http://127.0.0.1:3000/api/users/${passportNumber}` : null,
+    fetcher
+  );
+
+  const onSubmitForm = (
+    familyNameControls,
+    nationalityControls,
+    passportNumbers,
+    dobs,
+    genders,
+    startDates
+  ) => {
+    SetPassportNumber(passportNumbers);
+    console.log(passportNumber);
+    setShouldFetch(true);
+
+    //const { data, error } = useSWR(`http://127.0.0.1:3000/api/users/${passportNumbers}`, fetcher);
+    console.log(data, error);
+
+    if (data) {
+      const result = data.user;
+      if (
+        result.familyName === familyNameControls &&
+        result.passportNationality === nationalityControls &&
+        result.passportNumber === passportNumbers &&
+        result.dob === dobs &&
+        result.gender === genders &&
+        result.visaStartDate === startDates
+      ) {
+        setUsers(data.user);
+        const cookieJson = data.user.json();
+        console.log(cookieJson);
+        setCookie("cookieKey", data.user);
+        router.push("/workentitlement/visaVerificationEnquiry.aspx/historyId");
+      } else {
+        setMessage("The data you entered does not match with our data!");
+      }
+    }
+
+    //createCookies(passportNumbers)
+  };
+
   const login2 = {
     login: "login",
     firstLogin: "firstLogin",
@@ -60,7 +118,7 @@ export default function InnerContainer() {
       <div className={styles.content}>
         <h1>Visa Verification Enquiry</h1>
 
-        <p>&nbsp;</p>
+        <p></p>
 
         <div>
           <span>Enter the details of the visa to be verified.</span>
@@ -80,8 +138,7 @@ export default function InnerContainer() {
 
         <p>&nbsp;</p>
 
-        <Form />
-        
+        <Form onSubmitForm={onSubmitForm} />
       </div>
     </div>
   );

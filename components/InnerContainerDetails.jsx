@@ -2,9 +2,11 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import { getPNumCookies } from "@/app/action";
 import { useEffect, useState } from "react";
-import { getCookie, getCookies } from "cookies-next";
+import { getCookie, getCookies, hasCookie } from "cookies-next";
 import { fetcher } from "@/app/fetcher";
 import useSWR from 'swr'
+import { useRouter } from "next/navigation";
+import moment from "moment";
 
  
 
@@ -18,23 +20,61 @@ return data;
 }
 
 export default function InnerContainerDetails() {
-    const [pNumber, setPNumber] = useState(null);
+    const [dateF, setDateF] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [familyName, setFamilyName] = useState('');
+    const [dob, setDob] = useState('');
+    const [gender, setGender] = useState('');
+    const [visaType, setVisaType] = useState('');
+    const [visaStartDate, setVisaStartDate] = useState('');
+    const [firstEntryBefore, setFirstEntryBefore] = useState('');
+    const [passportNationality, setPassportNationality] = useState('');
+    const [passportNumber, setPassportNumber] = useState('');
+    const [clientNumber, setClientNumber] = useState('');
+    const [visaExpiryDate, setVisaExpiryDate] = useState('');
+    const [numberOfEntries, setNumberOfEntries] = useState('');
+    const [expiryDate, setExpiryDate] = useState('');
+    const [pdfLink, setPdfLink] = useState('');
+    const [enquiryDate, setEnquiryDate] = useState('');
+    const [validAsAt, setValidAsAt] = useState('');
+    let router = useRouter();
+ 
 
-    const cookie = getCookie("cookieKey")
-    console.log(cookie)
+    useEffect(() => {
+
+      const cookie = getCookie("cookieKey");
+      let hasCookieExp = hasCookie('cookieKey');
+      let result = JSON.parse(cookie);
+      var date1 = moment(result.visaStartDate, "DD-MM-YYYY").format('Do MMMM YYYY');
+      setDateF(date1);
+
+      //console.log(date1);
+      
+     if (hasCookieExp===true ){
     
-   // useEffect(() => {
-     //   let cookie = getCookies("cookieKey");
-      //  setPNumber(cookie);
-    //}, [])
+         // let result = data.user;
+          let resultGender = (result.gender).substring(0, 1);
+          setFirstName(result.firstName);
+          setFamilyName(result.familyName);
+          setDob(result.dob)
+          setGender(resultGender) 
+          setVisaType(result.visaType) 
+          setVisaStartDate(result.visaStartDate)
+          setFirstEntryBefore(result.firstEntryBefore)
+          setPassportNationality(result.passportNationality) 
+          setPassportNumber(result.passportNumber)
+          setClientNumber(result.clientNumber)
+          setVisaExpiryDate(result.visaExpiryDate) 
+          setNumberOfEntries(result.numberOfEntries) 
+          setExpiryDate(result.expiryDate)
+          setPdfLink(result.pdfLink)
+          setEnquiryDate(result.enquiryDate)
+          setValidAsAt(result.validAsAt)
+      } else {
+        router.push("/workentitlement/visaVerificationEnquiry.aspx");
+      }
+    }, [])
 
-   let { data, error } = useSWR(`http://127.0.0.1:3000/api/users/${cookie}`, fetcher);
-
-   console.log(data, error); 
-   if (data){
-        let result = data.user;
-        let resultGender = (result.gender).subString(0, 1);
-    }
 
   return (
     <div className={styles.innercontainer}>
@@ -111,27 +151,27 @@ export default function InnerContainerDetails() {
           >
             <div>
               <span className={styles.fauxLabel}>Family, First Name</span>
-              <span>{result.firstName}, {result.familyName}</span>
+              <span>{firstName}, {familyName}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Date of Birth</span>
-              <span>{result.dob}</span>
+              <span>{dob}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Gender</span>
-              <span>M</span>
+              <span>{gender}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Passport Nationality</span>
-              <span>{result.passportNationality}</span>
+              <span>{passportNationality}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Passport Number</span>
-              <span>{result.passportNumber} </span>
+              <span>{passportNumber} </span>
             </div>
             <div>
               <span className={styles.fauxLabel}>INZ Client Number</span>
-              <span>79928066</span>
+              <span>{clientNumber}</span>
             </div>
           </div>
           <div
@@ -140,27 +180,27 @@ export default function InnerContainerDetails() {
           >
             <div>
               <span className={styles.fauxLabel}>Visa Type</span>
-              <span>Visitor</span>
+              <span>{visaType}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Visa Start Date</span>
-              <span>01/05/23</span>
+              <span>{visaStartDate}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>First Entry Before</span>
-              <span>Not applicable</span>
+              <span>{firstEntryBefore}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Number of Entries</span>
-              <span>Multiple</span>
+              <span>{numberOfEntries}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Expiry Date Travel</span>
-              <span>01/05/24</span>
+              <span>{visaExpiryDate}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Visa Expiry</span>
-              <span>01/05/24</span>
+              <span>{expiryDate}</span>
             </div>
           </div>
           <div id="innerContainer_mainContent_bottomRow">
@@ -179,16 +219,16 @@ export default function InnerContainerDetails() {
                 shall not study for more than 3 months in every 12 month period
                 in NZ. .The holder shall not undertake employment in NZ..The
                 last date you may travel and re-enter New Zealand is 01 May
-                2024..The start date of this visa is 01 May 2023..Thi
+                2024..The start date of this visa is {dateF}..Thi
               </span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Enquiry Date</span>
-              <span>01/02/24</span>
+              <span>{enquiryDate}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Valid as at</span>
-              <span>01/02/24</span>
+              <span>{validAsAt}</span>
             </div>
           </div>
         </div>
@@ -211,7 +251,7 @@ export default function InnerContainerDetails() {
                   name="ctl00$ctl00$innerContainer$mainContent$btnDownloadHistory"
                   value="Download Result"
                   id="innerContainer_mainContent_btnDownloadHistory"
-                  tabindex="9"
+                  tabIndex="9"
                 />
                 <span className={styles.btnCorner2}></span>
               </div>
