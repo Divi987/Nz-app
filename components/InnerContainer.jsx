@@ -13,6 +13,9 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useRouter } from "next/navigation";
 import { userPassport, userState } from "@/recoil/atoms/states";
 import { userPassportStateSelector } from "@/recoil/selectors/selectors";
+import SideView from "./SideView";
+import Login from "./Login";
+import LeftLogin from "./LeftLogin";
 
 export default function InnerContainer() {
   const [message, setMessage] = useState("");
@@ -69,7 +72,10 @@ export default function InnerContainer() {
   };
   return (
     <div className={styles.innercontainer}>
-      <div className={styles.mainNav}>
+      <SideView />
+      <Login />
+      <LeftLogin />
+      {/*<div className={styles.mainNav}>
         <ul>
           <li>
             <Link href="">VisaView</Link>
@@ -97,7 +103,7 @@ export default function InnerContainer() {
           <span id="innerContainer_CurrentRepresentativeName">
             Manish Kumar
           </span>
-          <Link id="innerContainer_logoutLinkControl" href="">
+          <Link id="innerContainer_logoutLinkControl" href="https://www.immigration.govt.nz/about-us/our-online-systems/visaview">
             logout
           </Link>
         </div>
@@ -115,7 +121,7 @@ export default function InnerContainer() {
             Visa Verification Service
           </span>
         </div>
-      </div>
+      </div>*/}
       <div className={styles.content}>
         <h1>Visa Verification Enquiry</h1>
 

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import styles from "./styles.module.css";
 import { getPNumCookies } from "@/app/action";
@@ -7,6 +9,9 @@ import { fetcher } from "@/app/fetcher";
 import useSWR from 'swr'
 import { useRouter } from "next/navigation";
 import moment from "moment";
+import SideView from "./SideView";
+import Login from "./Login";
+import LeftLogin from "./LeftLogin";
 
 export default function InnerContainerDetails() {
     const [dateF, setDateF] = useState('');
@@ -70,7 +75,10 @@ export default function InnerContainerDetails() {
 
   return (
     <div className={styles.innercontainer}>
-      <div className={styles.mainNav}>
+      <SideView />
+      <Login />
+      <LeftLogin />
+      {/*<div className={styles.mainNav}>
         <ul>
           <li>
             <Link href="">VisaView</Link>
@@ -98,7 +106,7 @@ export default function InnerContainerDetails() {
           <span id="innerContainer_CurrentRepresentativeName">
             Manish Kumar
           </span>
-          <Link id="innerContainer_logoutLinkControl" href="">
+          <Link id="innerContainer_logoutLinkControl" href="https://www.immigration.govt.nz/about-us/our-online-systems/visaview">
             logout
           </Link>
         </div>
@@ -116,7 +124,7 @@ export default function InnerContainerDetails() {
             Visa Verification Service
           </span>
         </div>
-      </div>
+      </div> */}
       <div className={styles.content}>
         <h1>Visa Verification Result</h1>
         <h2>Result</h2>
