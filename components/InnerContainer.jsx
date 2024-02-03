@@ -3,24 +3,27 @@
 import Link from "next/link";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import Form, { userState } from "./Form";
+import Form from "./Form";
 import { useState } from "react";
 import { createCookies } from "@/app/action";
 import { setCookie } from "cookies-next";
 import { fetcher } from "@/app/fetcher";
 import useSWR from "swr";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useRouter } from "next/navigation";
+import { userPassport, userState } from "@/recoil/atoms/states";
+import { userPassportStateSelector } from "@/recoil/selectors/selectors";
 
 export default function InnerContainer() {
   const [message, setMessage] = useState("");
   const [shouldFetch, setShouldFetch] = useState(false);
-  const [passportNumber, SetPassportNumber] = useState(null);
+  const [passportNumber, SetPassportNumber] = useState('');
   const setUsers = useSetRecoilState(userState);
   let router = useRouter();
+  const passportRecoilValue = useRecoilValue(userPassportStateSelector);
 
   const { data, error, isLoading } = useSWR(
-    shouldFetch ? `http://127.0.0.1:3000/api/users/${passportNumber}` : null,
+    shouldFetch ? `http://127.0.0.1:3000/api/users/${passportRecoilValue}` : null,
     fetcher
   );
 
@@ -32,12 +35,9 @@ export default function InnerContainer() {
     genders,
     startDates
   ) => {
-    SetPassportNumber(passportNumbers);
-    console.log(passportNumber);
+    //SetPassportNumber(passportNumbers);
+    //console.log('inn: ',passportNumber);
     setShouldFetch(true);
-
-    //const { data, error } = useSWR(`http://127.0.0.1:3000/api/users/${passportNumbers}`, fetcher);
-    console.log(data, error);
 
     if (data) {
       const result = data.user;
@@ -50,14 +50,15 @@ export default function InnerContainer() {
         result.visaStartDate === startDates
       ) {
         setUsers(data.user);
-        const cookieJson = data.user.json();
+        const cookieJson = data.user;
         console.log(cookieJson);
-        setCookie("cookieKey", data.user);
+        setCookie("cookieKey", JSON.stringify(data.user), {maxAge: 60*10 });
         router.push("/workentitlement/visaVerificationEnquiry.aspx/historyId");
       } else {
-        setMessage("The data you entered does not match with our data!");
+        setMessage("The details you have entered do not match a current visa issued by INZ. Please check the information provided.");
       }
     }
+    console.log(message);
 
     //createCookies(passportNumbers)
   };
@@ -138,7 +139,7 @@ export default function InnerContainer() {
 
         <p>&nbsp;</p>
 
-        <Form onSubmitForm={onSubmitForm} />
+        <Form onSubmitForm={onSubmitForm} noMatchData={message} />
       </div>
     </div>
   );
