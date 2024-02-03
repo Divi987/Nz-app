@@ -16,7 +16,7 @@ export default function VisaVerificationEnquiry() {
       <div className={styles.pageWrapper}>
         <Header />
       </div>
-        <Breadcrumb />
+        <Breadcrumb title="Visa Verification Enquiry" />
     </div>
     <div className={styles.mainInnerContainer}>
        <InnerContainer />
