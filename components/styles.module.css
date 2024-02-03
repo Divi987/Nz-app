@@ -361,7 +361,7 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   width: 100%;
 }
 
-.buttons input {
+.buttons a {
   border-style: none;
   border-color: inherit;
   border-width: 0;
@@ -376,6 +376,7 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   margin-left: 5px;
   margin-right: 0;
   margin-top: 0;
+  text-decoration: none;
 }
 
 .form .column
@@ -396,13 +397,14 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   width: 10em;
 }
 
+/*
 .buttons
 {
   float: left;
   height: 26px;
   margin: 2em 0;
   width: 100%;
-}
+}*/
 
 .buttons input
 {
@@ -420,4 +422,35 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   margin-left: 5px;
   margin-right: 0;
   margin-top: 0;
+}
+
+/* Error */
+
+.error
+{
+  float: left;
+  width: 100%;
+}
+
+.error ul
+{
+  background-color: #ffe1ff;
+  clear: both;
+  color: #ff0000;
+  margin-bottom: 1em;
+  padding: 2em;
+  width: 90%;
+}
+
+.error li
+{
+  list-style-type: circle;
+}
+
+.dnone {
+  display: none;
+}
+
+.dblock {
+  display: block;
 }

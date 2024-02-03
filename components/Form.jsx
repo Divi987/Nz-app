@@ -10,85 +10,104 @@ import { createCookies } from "@/app/action";
 import { getCookie, setCookie } from "cookies-next";
 import { fetcher } from "@/app/fetcher";
 import useSWR from "swr";
+import { userPassport } from "@/recoil/atoms/states";
 
-export const userState = atom({
-  key: "userState",
-  default: {},
-});
+export default function Form({ onSubmitForm, noMatchData }) {
+  const [error, setError] = useState({
+    fName: "",
+    passportNum: "",
+    nationality: "",
+    dob: "",
+    gender: "",
+    startDate: ""
+  });
 
-export const userStateSelector = selector({
-  key: "userStateSelector",
-  get: ({ get }) => get(userState),
-});
+  const [passportNumbers, SetPassportNumbers] = useState("");
+  const [dnone, setDnone] = useState(`${styles.dnone}`);
 
-export default function Form({ onSubmitForm }) {
-  const [message, setMessage] = useState("");
-  const [passportNumbers, SetPassportNumbers] = useState(null);
   const familyNameControl = useRef();
   const nationalityControl = useRef();
   const passportNumber = useRef();
   const dob = useRef();
   const gender = useRef();
   const startDate = useRef();
-  const setUsers = useSetRecoilState(userState);
+  const setUserPass = useSetRecoilState(userPassport);
   let router = useRouter();
 
-  
-  /*const { data, error, isLoading } = useSWR(
-    shouldFetch ? `http://127.0.0.1:3000/api/users/${passportNumbers}` : null,
-    fetcher
-  );*/
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     const familyNameControls = familyNameControl.current.value;
     const nationalityControls = nationalityControl.current.value;
-    //const passportNumbers = passportNumber.current.value;
+    const passportNumberRef = passportNumber.current.value;
     const dobs = dob.current.value;
     const genders = gender.current.value;
     const startDates = startDate.current.value;
-    
-    onSubmitForm(familyNameControls, nationalityControls, passportNumbers, dobs, genders, startDates);
-    
-    /*console.log(data.user, error, isLoading);
-    // if(data){
-    const result = data.user;
-    console.log(
+
+    familyNameControls === ""
+      ? setError((preState) => ({ ...preState, fName: "Family Name Needed" }))
+      : setError((preState) => ({ ...preState, fName: "" }));
+    console.log(error);
+    nationalityControls === ""
+      ? setError((preState) => ({
+          ...preState,
+          nationality: "Nationality Needed",
+        }))
+      : setError((preState) => ({ ...preState, nationality: "" }));
+    passportNumberRef === ""
+      ? setError((preState) => ({
+          ...preState,
+          passportNum: "Passport Number Needed",
+        }))
+      : setError((preState) => ({ ...preState, passportNum: "" }));
+    dobs === ""
+      ? setError((preState) => ({ ...preState, dob: "Date of Birth Needed" }))
+      : setError((preState) => ({ ...preState, dob: "" }));
+    genders === ""
+      ? setError((preState) => ({ ...preState, gender: "Gender Needed" }))
+      : setError((preState) => ({ ...preState, gender: "" }));
+    startDates === ""
+      ? setError((preState) => ({
+          ...preState,
+          startDate: "Start Date Needed",
+        }))
+      : setError((preState) => ({ ...preState, startDate: "" }));
+
+    console.log(noMatchData);
+
+    setUserPass(passportNumberRef);
+
+    onSubmitForm(
       familyNameControls,
       nationalityControls,
-      passportNumbers,
+      passportNumberRef,
       dobs,
       genders,
-      startDates,
-      result.familyName === familyNameControls,
-      result.passportNationality === nationalityControls.toString(),
-      result.passportNumber === passportNumbers.toString() ,
-      result.dob === dobs.toString(),
-      result.gender === genders.toString(),
-      result.visaStartDate === startDates.toString()
+      startDates
     );
-    if (
-      result.familyName === familyNameControls.toString() &&
-      result.passportNationality === nationalityControls.toString() &&
-      result.passportNumber === passportNumbers.toString() &&
-      result.dob === dobs.toString() &&
-      result.gender === genders.toString() &&
-      result.startDate === startDates.toString()
-    ) {
-      setUsers(data.user);
-      setCookie("cookieKey", data.user);
-      router.push("/workentitlement/visaVerificationEnquiry.aspx/historyId");
-    } else {
-      setMessage("The data you entered does not match with our data!");
-    }
-    // }
-
-    //createCookies(passportNumbers)*/
   };
 
   return (
     <>
-      <p>{message}</p>
+      {error.fName ||
+      error.passportNum ||
+      error.dob ||
+      error.nationality ||
+      error.gender ||
+      error.startDate || noMatchData ? (
+        <div className={styles.error}>
+          <ul>
+            {error.fName ? <li>{error.fName}</li> : <></>}
+            {error.passportNum ? <li>{error.passportNum}</li> : <></>}
+            {error.nationality ? <li>{error.nationality}</li> : <></>}
+            {error.dob ? <li>{error.dob}</li> : <></>}
+            {error.gender ? <li>{error.gender}</li> : <></>}
+            {error.startDate ? <li>{error.startDate}</li> : <></>}
+            {noMatchData ? <li>{noMatchData}</li>: <></>}
+          </ul>
+        </div>
+      ) : (
+        <></>
+      )}
 
       <form onSubmit={handleSubmit}>
         <fieldset className={styles.form}>
@@ -337,13 +356,13 @@ export default function Form({ onSubmitForm }) {
               <option value="245">Uzbekistan</option>
               <option value="246">Vanuatu</option>
               <option value="247">Vatican City</option>
-              <option value="248">Venezuela</option>
-              <option value="249">Vietnam</option>
-              <option value="253">Western Sahara</option>
-              <option value="254">Yemen</option>
-              <option value="256">Yugoslavia</option>
-              <option value="257">Zambia</option>
-              <option value="258">Zimbabwe</option>
+              <option value="Venezuela">Venezuela</option>
+              <option value="Vietnam">Vietnam</option>
+              <option value="Western Sahara">Western Sahara</option>
+              <option value="Yemen">Yemen</option>
+              <option value="Yugoslavia">Yugoslavia</option>
+              <option value="Zambia">Zambia</option>
+              <option value="Zimbabwe">Zimbabwe</option>
             </select>
           </div>
 
@@ -359,9 +378,6 @@ export default function Form({ onSubmitForm }) {
               tabIndex="3"
               className={styles.medium}
               ref={passportNumber}
-              onChange={(e) => {
-                SetPassportNumbers(e.target.value);
-              }}
             />
           </div>
 
