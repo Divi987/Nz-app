@@ -2,22 +2,11 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import { getPNumCookies } from "@/app/action";
 import { useEffect, useState } from "react";
-import { getCookie, getCookies, hasCookie } from "cookies-next";
+import { deleteCookie, getCookie, getCookies, hasCookie } from "cookies-next";
 import { fetcher } from "@/app/fetcher";
 import useSWR from 'swr'
 import { useRouter } from "next/navigation";
 import moment from "moment";
-
- 
-
-const fetchData = async (pNumber) => {
-    const fetchData = await fetch(`http://127.0.0.1:3000/api/users/${pNumber}`, {
-    mode: 'cors',
-    'Access-Control-Allow-Origin': '*'
-});
-const data = fetchData.json();
-return data;
-}
 
 export default function InnerContainerDetails() {
     const [dateF, setDateF] = useState('');
@@ -34,7 +23,7 @@ export default function InnerContainerDetails() {
     const [visaExpiryDate, setVisaExpiryDate] = useState('');
     const [numberOfEntries, setNumberOfEntries] = useState('');
     const [expiryDate, setExpiryDate] = useState('');
-    const [pdfLink, setPdfLink] = useState('');
+    const [pdfLink, setPdfLink] = useState('#');
     const [enquiryDate, setEnquiryDate] = useState('');
     const [validAsAt, setValidAsAt] = useState('');
     let router = useRouter();
@@ -43,35 +32,38 @@ export default function InnerContainerDetails() {
     useEffect(() => {
 
       const cookie = getCookie("cookieKey");
-      let hasCookieExp = hasCookie('cookieKey');
-      let result = JSON.parse(cookie);
-      var date1 = moment(result.visaStartDate, "DD-MM-YYYY").format('Do MMMM YYYY');
-      setDateF(date1);
+      let hasCookieExp = hasCookie('cookieKey');   
 
-      //console.log(date1);
+      if(!hasCookieExp) {
+        deleteCookie('cookieKey');
+        router.push("/workentitlement/visaVerificationEnquiry.aspx");
+      } else {
+        
+        let result = JSON.parse(cookie);
+        var date1 = moment(result.visaStartDate, "DD-MM-YYYY").format('Do MMMM YYYY');
+        setDateF(date1);
+      //}
       
-     if (hasCookieExp===true ){
+     //if (result && hasCookieExp===true ){
     
          // let result = data.user;
           let resultGender = (result.gender).substring(0, 1);
           setFirstName(result.firstName);
           setFamilyName(result.familyName);
-          setDob(result.dob)
-          setGender(resultGender) 
-          setVisaType(result.visaType) 
-          setVisaStartDate(result.visaStartDate)
-          setFirstEntryBefore(result.firstEntryBefore)
-          setPassportNationality(result.passportNationality) 
-          setPassportNumber(result.passportNumber)
-          setClientNumber(result.clientNumber)
-          setVisaExpiryDate(result.visaExpiryDate) 
-          setNumberOfEntries(result.numberOfEntries) 
-          setExpiryDate(result.expiryDate)
-          setPdfLink(result.pdfLink)
-          setEnquiryDate(result.enquiryDate)
-          setValidAsAt(result.validAsAt)
-      } else {
-        router.push("/workentitlement/visaVerificationEnquiry.aspx");
+          setDob(result.dob);
+          setGender(resultGender);
+          setVisaType(result.visaType); 
+          setVisaStartDate(result.visaStartDate);
+          setFirstEntryBefore(result.firstEntryBefore);
+          setPassportNationality(result.passportNationality); 
+          setPassportNumber(result.passportNumber);
+          setClientNumber(result.clientNumber);
+          setVisaExpiryDate(result.visaExpiryDate); 
+          setNumberOfEntries(result.numberOfEntries); 
+          setExpiryDate(result.expiryDate);
+          setPdfLink(result.pdfLink);
+          setEnquiryDate(result.enquiryDate);
+          setValidAsAt(result.validAsAt);
       }
     }, [])
 
@@ -246,18 +238,21 @@ export default function InnerContainerDetails() {
             >
               <div>
                 <span className={styles.btnCorner1}></span>
-                <input
+                <Link
                   type="submit"
                   name="ctl00$ctl00$innerContainer$mainContent$btnDownloadHistory"
                   value="Download Result"
                   id="innerContainer_mainContent_btnDownloadHistory"
                   tabIndex="9"
-                />
+                  target="_blank"
+                  href={pdfLink!==null ?pdfLink :"#" }
+                >Download Result </Link>
                 <span className={styles.btnCorner2}></span>
               </div>
             </div>
             <p>
-            <a id="innerContainer_mainContent_HelpLink1" href="https://www.immigration.govt.nz/formshelp/visaview/understanding-the-answer" onClick="window.open('https://www.immigration.govt.nz/formshelp/visaview/understanding-the-answer','eespopup','toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=720,height=520,left=50,top=50'); return false;">Questions about this result?</a>
+            <a id="innerContainer_mainContent_HelpLink1" href="https://www.immigration.govt.nz/formshelp/visaview/understanding-the-answer" 
+            >Questions about this result?</a>
         </p>
           </div>
       </div>
