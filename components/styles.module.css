@@ -1,0 +1,465 @@
+.mainHeader {
+  background: #0099cc;
+
+}
+
+.pageWrapper {
+  background: #fff repeat-y 163px 0;
+  margin: auto;
+  position: relative;
+  width: 820px;
+}
+
+.header {
+  background: #0099cc none;
+  height: 115px;
+  position: relative;
+  width: 100%;
+}
+
+.header ul {
+  bottom: 15px;
+  font-size: 1.2em;
+  position: absolute;
+  right: 10px;
+}
+
+.header ul li {
+  float: left;
+  list-style: none none;
+  margin-right: 15px;
+}
+
+.header a, .header a:link, .header a:visited {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.hidden {
+  margin: -9999px;
+  position: absolute;
+}
+
+.logo {
+  background: transparent url(../public/images/logo-immigrationNZ.gif) no-repeat;
+  display: block;
+  float: left;
+  height: 85px;
+  margin: 20px 25px 0;
+  width: 400px;
+}
+
+/*Breadscrub*/
+.breadcrumbs {
+  background: #fff url(../public/images/bg-breadcrumb.png) repeat-x;
+  text-indent: 10px;
+  padding: 10px 0 4px;
+  width: 100%;
+  border-bottom: 1px solid #aaa;
+}
+
+.breadcrumbsMain {
+  margin: auto;
+  width: 820px;
+}
+
+.breadcrumbs ul {
+  background: url(../public/images/icon-home.png) no-repeat;
+  margin-left: 30px;
+  padding-left: 15px;
+  /* width: 820px; */
+}
+
+.breadcrumbs li {
+  display: inline;
+  font-size: 1.2em;
+  list-style-type: none;
+  margin-right: 3px;
+}
+
+.breadcrumbs a:link, .breadcrumbs a:visited {
+  background: url(../public/images/arrow-breadcrumb.gif) no-repeat right .4em;
+  color: #666;
+  padding-right: 10px;
+  text-decoration: underline;
+}
+
+/* InnerContainer */
+
+.mainInnerContainer{
+  margin: auto;
+  width: 820px;
+}
+
+.innercontainer {
+  background: #fff url(../public/images/bg-shadow.png) repeat-y;
+  float: left;
+  font-size: 1.1em;
+  padding: 0 25px 1em;
+  position: relative;
+  width: 820px;
+}
+
+.mainNav {
+  float: left;
+  margin-top: 1em;
+  padding-bottom: .5em;
+  width: 163px;
+}
+
+.mainNav ul {
+  float: left;
+  text-align: left;
+  width: 153px;
+}
+
+.mainNav li{
+  float: left;
+  list-style: none;
+}
+
+.mainNav a:link, .mainNav a:visited {
+  color: #0099cc;
+  display: block;
+  float: left;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 2px 0 2px 10px;
+  text-decoration: none;
+  width: 135px;
+}
+
+.mainNav ul ul, .mainNav ul ul {
+  margin: 0 0 0 10px;
+  padding: 0;
+}
+
+.mainNav ul ul a:link, .mainNav ul ul a:visited {
+  background: url(../public/images/arrow.png) no-repeat 0 6px;
+  color: #4d4d4d;
+  font-size: 1em;
+  font-weight: normal;
+  padding-left: 12px;
+}
+
+.login {
+  border: 1px dashed #ccc;
+  border-top: 0;
+  float: right;
+  margin: 0 1em 0 .75em;
+  padding: 1em 0;
+  width: 275px;
+}
+
+.login div {
+  clear: both;
+  padding: 0 1em;
+}
+
+.login span.fauxLabel {
+  display: inline-block;
+  font-weight: normal;
+  width: 8em;
+}
+
+.login span {
+  float: left;
+  font-weight: bold;
+  padding-bottom: .5em;
+  width: 11em;
+  -ms-word-break: normal;
+  -moz-word-break: normal;
+  -o-word-break: normal;
+  -webkit-hyphens: auto;
+  -moz-hyphens: none;
+  hyphens: auto;
+}
+
+.login a:link, .login a:visited {
+  color: #336699;
+  float: right;
+  position: relative;
+}
+
+.firstLogin {
+  float: left;
+}
+
+.firstLogin span {
+  width: 11.2em;
+}
+
+.firstLogin span.fauxLabel {
+  width: 6.0em;
+}
+
+.firstLogin .firstLoginFont {
+  font-size: 12px;
+}
+
+.content {
+  float: right;
+  margin: 10px .5em 90px 0;
+  position: relative;
+  width: 590px;
+}
+
+.content h1 {
+  color: #0099cc;
+  font: normal 2em verdana, geneva, sans-serif;
+  line-height: 28px;
+  margin-bottom: 5px;
+}
+
+.content h2 {
+    float: left;
+    font-size: 1em;
+    margin: 1em 0 .5em;
+    width: 100%;
+    font-weight: 700;
+}
+
+.content p
+{
+  clear: both;
+  margin-bottom: 1em;
+  position: relative;
+}
+
+/* Footer */
+
+.footer {
+  background: #e6e6e6 url(../public/images/bg-shadow-footer.png) repeat-y;
+  clear: both;
+  height: 34px;
+  padding: 0 19px;
+  width: 820px;
+  margin: auto;
+}
+
+.footer ul {
+  border: 1px solid #bbb;
+  border-width: 1px 0;
+  float: left;
+  padding-top: 10px;
+  width: 782px;
+}
+
+.footer li {
+  float: left;
+  font-size: 1.1em;
+  line-height: .7;
+  list-style: none;
+  padding-bottom: 10px;
+}
+
+li.last, li.last a, li.last a:link, li.last a:visited {
+  border: 0;
+}
+
+.footer a, .footer a:link, .footer a:visited {
+  color: #4d4d4d;
+  /* padding: 0 5px; */
+  text-decoration: none;
+}
+
+.footer img {
+  margin: -18px 7px 0;
+}
+
+.footer .pdlft5 {
+  padding-left: 5px;
+}
+
+.footer .pdrt5 {
+  padding-right: 5px;
+}
+
+/* form */
+
+.form {
+  float: left;
+  margin-bottom: 1em;
+  width: 100%;
+}
+
+.form legend {
+  margin: -9999px;
+  position: absolute;
+}
+
+.form .div {
+  float: left;
+  padding-bottom: .5em;
+  width: 100%;
+}
+
+.form label, .form span.fauxLabel {
+  color: #333;
+  display: inline-block;
+  padding: .2em 0 .2em 2em;
+  width: 14em;
+}
+
+.form label span, .form .fauxLabel span, span.mandatory {
+  color: #ff0000;
+  float: none;
+  padding-left: .25em;
+}
+
+.form input {
+  margin-right: .25em;
+  width: 18em;
+  border: 1px solid #aaa;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.hasButton label, .hasButton select {
+  float: left;
+}
+
+.form select {
+  width: 18em;
+  border: 1px solid #aaa;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.form input.medium {
+  width: 8.5em;
+  height: 20px;
+}
+
+.form .dob {
+  display: flex;
+}
+
+.form select.small {
+  width: 8.5em;
+}
+
+.visaconsent {
+  margin-top: 15px;
+}
+
+.visaconsent input {
+  width: 15px;
+  margin-left: 10px;
+}
+
+.visaconsent label {
+  width: 280px;
+  padding: 0px;
+}
+
+.buttons {
+  float: left;
+  height: 26px;
+  margin: 2em 0;
+  width: 100%;
+}
+
+.buttons a {
+  border-style: none;
+  border-color: inherit;
+  border-width: 0;
+  background-color: #0099cc;
+  color: #fff;
+  cursor: pointer;
+  float: left;
+  font: bold 1em verdana;
+  padding: 5px 7px;
+  overflow: visible;
+  width: auto;
+  margin-left: 5px;
+  margin-right: 0;
+  margin-top: 0;
+  text-decoration: none;
+}
+
+.form .column
+{
+  float: left;
+  width: 45%;
+}
+
+.form span
+{
+  color: #336699;
+  float: left;
+  padding: .2em 0;
+}
+
+.column span
+{
+  width: 10em;
+}
+
+/*
+.buttons
+{
+  float: left;
+  height: 26px;
+  margin: 2em 0;
+  width: 100%;
+}*/
+
+.buttons input
+{
+  border-style: none;
+  border-color: inherit;
+  border-width: 0;
+  background-color: #0099cc;
+  color: #fff;
+  cursor: pointer;
+  float: left;
+  font: bold 1em verdana;
+  padding: 5px 7px;
+  overflow: visible;
+  width: auto;
+  margin-left: 5px;
+  margin-right: 0;
+  margin-top: 0;
+}
+
+/* Error */
+
+.error
+{
+  float: left;
+  width: 100%;
+}
+
+.error ul
+{
+  background-color: #ffe1ff;
+  clear: both;
+  color: #ff0000;
+  margin-bottom: 1em;
+  padding: 2em;
+  width: 90%;
+}
+
+.error li
+{
+  list-style-type: circle;
+}
+
+.dnone {
+  display: none;
+}
+
+.dblock {
+  display: block;
+}
+
+.form .datepicker {
+  width: 8.5em !important;
+  margin-right: .25em;
+}
+
+.form .datepicker .datePickerwrapper{
+  width: 8.5em !important;
+}
