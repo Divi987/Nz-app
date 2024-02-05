@@ -6,7 +6,7 @@ import { getPNumCookies } from "@/app/action";
 import { useEffect, useState } from "react";
 import { deleteCookie, getCookie, getCookies, hasCookie } from "cookies-next";
 import { fetcher } from "@/app/fetcher";
-import useSWR from 'swr'
+import useSWR from "swr";
 import { useRouter } from "next/navigation";
 import moment from "moment";
 import SideView from "./SideView";
@@ -14,64 +14,62 @@ import Login from "./Login";
 import LeftLogin from "./LeftLogin";
 
 export default function InnerContainerDetails() {
-    const [dateF, setDateF] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [familyName, setFamilyName] = useState('');
-    const [dob, setDob] = useState('');
-    const [gender, setGender] = useState('');
-    const [visaType, setVisaType] = useState('');
-    const [visaStartDate, setVisaStartDate] = useState('');
-    const [firstEntryBefore, setFirstEntryBefore] = useState('');
-    const [passportNationality, setPassportNationality] = useState('');
-    const [passportNumber, setPassportNumber] = useState('');
-    const [clientNumber, setClientNumber] = useState('');
-    const [visaExpiryDate, setVisaExpiryDate] = useState('');
-    const [numberOfEntries, setNumberOfEntries] = useState('');
-    const [expiryDate, setExpiryDate] = useState('');
-    const [pdfLink, setPdfLink] = useState('#');
-    const [enquiryDate, setEnquiryDate] = useState('');
-    const [validAsAt, setValidAsAt] = useState('');
-    let router = useRouter();
- 
+  const [dateF, setDateF] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [familyName, setFamilyName] = useState("");
+  const [dob, setDob] = useState("");
+  const [gender, setGender] = useState("");
+  const [visaType, setVisaType] = useState("");
+  const [visaStartDate, setVisaStartDate] = useState("");
+  const [firstEntryBefore, setFirstEntryBefore] = useState("");
+  const [passportNationality, setPassportNationality] = useState("");
+  const [passportNumber, setPassportNumber] = useState("");
+  const [clientNumber, setClientNumber] = useState("");
+  const [visaExpiryDate, setVisaExpiryDate] = useState("");
+  const [numberOfEntries, setNumberOfEntries] = useState("");
+  const [expiryDate, setExpiryDate] = useState("");
+  const [pdfLink, setPdfLink] = useState("#");
+  const [enquiryDate, setEnquiryDate] = useState("");
+  const [validAsAt, setValidAsAt] = useState("");
+  let router = useRouter();
 
-    useEffect(() => {
+  useEffect(() => {
+    const cookie = getCookie("cookieKey");
+    let hasCookieExp = hasCookie("cookieKey");
 
-      const cookie = getCookie("cookieKey");
-      let hasCookieExp = hasCookie('cookieKey');   
-
-      if(!hasCookieExp) {
-        deleteCookie('cookieKey');
-        router.push("/workentitlement/visaVerificationEnquiry.aspx");
-      } else {
-        
-        let result = JSON.parse(cookie);
-        var date1 = moment(result.visaStartDate, "DD-MM-YYYY").format('Do MMMM YYYY');
-        setDateF(date1);
+    if (!hasCookieExp) {
+      deleteCookie("cookieKey");
+      router.push("/workentitlement/visaVerificationEnquiry.aspx");
+    } else {
+      let result = JSON.parse(cookie);
+      var date1 = moment(result.visaStartDate, "DD-MM-YYYY").format(
+        "Do MMMM YYYY"
+      );
+      setDateF(date1);
       //}
-      
-     //if (result && hasCookieExp===true ){
-    
-         // let result = data.user;
-          let resultGender = (result.gender).substring(0, 1);
-          setFirstName(result.firstName);
-          setFamilyName(result.familyName);
-          setDob(result.dob);
-          setGender(resultGender);
-          setVisaType(result.visaType); 
-          setVisaStartDate(result.visaStartDate);
-          setFirstEntryBefore(result.firstEntryBefore);
-          setPassportNationality(result.passportNationality); 
-          setPassportNumber(result.passportNumber);
-          setClientNumber(result.clientNumber);
-          setVisaExpiryDate(result.visaExpiryDate); 
-          setNumberOfEntries(result.numberOfEntries); 
-          setExpiryDate(result.expiryDate);
-          setPdfLink(result.pdfLink);
-          setEnquiryDate(result.enquiryDate);
-          setValidAsAt(result.validAsAt);
-      }
-    }, [])
 
+      //if (result && hasCookieExp===true ){
+
+      // let result = data.user;
+      let resultGender = result.gender.substring(0, 1);
+      setFirstName(result.firstName);
+      setFamilyName(result.familyName);
+      setDob(result.dob);
+      setGender(resultGender);
+      setVisaType(result.visaType);
+      setVisaStartDate(result.visaStartDate);
+      setFirstEntryBefore(result.firstEntryBefore);
+      setPassportNationality(result.passportNationality);
+      setPassportNumber(result.passportNumber);
+      setClientNumber(result.clientNumber);
+      setVisaExpiryDate(result.visaExpiryDate);
+      setNumberOfEntries(result.numberOfEntries);
+      setExpiryDate(result.expiryDate);
+      setPdfLink(result.pdfLink);
+      setEnquiryDate(result.enquiryDate);
+      setValidAsAt(result.validAsAt);
+    }
+  }, []);
 
   return (
     <div className={styles.innercontainer}>
@@ -151,7 +149,9 @@ export default function InnerContainerDetails() {
           >
             <div>
               <span className={styles.fauxLabel}>Family, First Name</span>
-              <span>{firstName}, {familyName}</span>
+              <span>
+                {firstName}, {familyName}
+              </span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Date of Birth</span>
@@ -232,38 +232,42 @@ export default function InnerContainerDetails() {
             </div>
           </div>
         </div>
-          <div>
-            <span>
-              <strong>Warning: </strong> if you download this visa information,
-              you must ensure that you treat the personal information it
-              contains in accordance with the Privacy Act 2020, including with
-              respect to storage, access, disclosure to third parties, retention
-              and disposal.
-            </span>
-            <div
-              id="innerContainer_mainContent_divDownloadHistory"
-              className={styles.buttons}
-            >
-              <div>
-                <span className={styles.btnCorner1}></span>
-                <Link
-                  type="submit"
-                  name="ctl00$ctl00$innerContainer$mainContent$btnDownloadHistory"
-                  value="Download Result"
-                  id="innerContainer_mainContent_btnDownloadHistory"
-                  tabIndex="9"
-                  target="_blank"
-                  download="visa"
-                  href={pdfLink!==null ?pdfLink :"#" }
-                >Download Result </Link>
-                <span className={styles.btnCorner2}></span>
-              </div>
+        <div>
+          <span>
+            <strong>Warning: </strong> if you download this visa information,
+            you must ensure that you treat the personal information it contains
+            in accordance with the Privacy Act 2020, including with respect to
+            storage, access, disclosure to third parties, retention and
+            disposal.
+          </span>
+          <div
+            id="innerContainer_mainContent_divDownloadHistory"
+            className={styles.buttons}
+          >
+            <div>
+              <span className={styles.btnCorner1}></span>
+              <Link
+                name="ctl00$ctl00$innerContainer$mainContent$btnDownloadHistory"
+                id="innerContainer_mainContent_btnDownloadHistory"
+                tabIndex="9"
+                target="_blank"
+                download="visa"
+                href={pdfLink !== null ? pdfLink : "#"}
+              >
+                Download Result{" "}
+              </Link>
+              <span className={styles.btnCorner2}></span>
             </div>
-            <p>
-            <a id="innerContainer_mainContent_HelpLink1" href="https://www.immigration.govt.nz/formshelp/visaview/understanding-the-answer" 
-            >Questions about this result?</a>
-        </p>
           </div>
+          <p>
+            <a
+              id="innerContainer_mainContent_HelpLink1"
+              href="https://www.immigration.govt.nz/formshelp/visaview/understanding-the-answer"
+            >
+              Questions about this result?
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );

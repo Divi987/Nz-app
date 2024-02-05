@@ -389,7 +389,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
 
           <div className={`${styles.dob} ${styles.div}`}>
             <label htmlFor="innerContainer_mainContent_DateOfBirthControl">
-              Date of Birth <br /> dd/mm/yy<span>*</span>
+              Date of Birth <br /> dd/mm/yyyy<span>*</span>
             </label>
             {/*<input
               name="ctl00$ctl00$innerContainer$mainContent$DateOfBirthControl"
