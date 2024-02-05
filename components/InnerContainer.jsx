@@ -26,7 +26,7 @@ export default function InnerContainer() {
   const passportRecoilValue = useRecoilValue(userPassportStateSelector);
 
   const { data, error, isLoading } = useSWR(
-    shouldFetch ? `https://b195-41-190-147-78.ngrok-free.app/api/users/${passportRecoilValue}` : null,
+    shouldFetch ? `/api/users/${passportRecoilValue}` : null,
     fetcher
   );
 
