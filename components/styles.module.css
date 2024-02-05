@@ -289,7 +289,7 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   position: absolute;
 }
 
-.form div {
+.form .div {
   float: left;
   padding-bottom: .5em;
   width: 100%;
@@ -453,4 +453,13 @@ li.last, li.last a, li.last a:link, li.last a:visited {
 
 .dblock {
   display: block;
+}
+
+.form .datepicker {
+  width: 8.5em !important;
+  margin-right: .25em;
+}
+
+.form .datepicker .datePickerwrapper{
+  width: 8.5em !important;
 }

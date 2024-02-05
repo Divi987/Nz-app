@@ -11,6 +11,9 @@ import { getCookie, setCookie } from "cookies-next";
 import { fetcher } from "@/app/fetcher";
 import useSWR from "swr";
 import { userPassport } from "@/recoil/atoms/states";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from "moment";
 
 export default function Form({ onSubmitForm, noMatchData }) {
   const [error, setError] = useState({
@@ -24,13 +27,15 @@ export default function Form({ onSubmitForm, noMatchData }) {
 
   const [passportNumbers, SetPassportNumbers] = useState("");
   const [dnone, setDnone] = useState(`${styles.dnone}`);
+  const [dob, setDob] = useState("");
+  const [startDate, setStartDate] = useState("")
 
   const familyNameControl = useRef();
   const nationalityControl = useRef();
   const passportNumber = useRef();
-  const dob = useRef();
+  //const dob = useRef();
   const gender = useRef();
-  const startDate = useRef();
+  //const startDate = useRef();
   const setUserPass = useSetRecoilState(userPassport);
   let router = useRouter();
 
@@ -39,9 +44,9 @@ export default function Form({ onSubmitForm, noMatchData }) {
     const familyNameControls = familyNameControl.current.value;
     const nationalityControls = nationalityControl.current.value;
     const passportNumberRef = passportNumber.current.value;
-    const dobs = dob.current.value;
+    //const dobs = dob.current.value;
     const genders = gender.current.value;
-    const startDates = startDate.current.value;
+    //const startDates = startDate.current.value;
 
     familyNameControls === ""
       ? setError((preState) => ({ ...preState, fName: "Family Name Needed" }))
@@ -49,32 +54,33 @@ export default function Form({ onSubmitForm, noMatchData }) {
     console.log(error);
     nationalityControls === ""
       ? setError((preState) => ({
-          ...preState,
-          nationality: "Nationality Needed",
-        }))
+        ...preState,
+        nationality: "Nationality Needed",
+      }))
       : setError((preState) => ({ ...preState, nationality: "" }));
     passportNumberRef === ""
       ? setError((preState) => ({
-          ...preState,
-          passportNum: "Passport Number Needed",
-        }))
+        ...preState,
+        passportNum: "Passport Number Needed",
+      }))
       : setError((preState) => ({ ...preState, passportNum: "" }));
-    dobs === ""
+    dob === ""
       ? setError((preState) => ({ ...preState, dob: "Date of Birth Needed" }))
       : setError((preState) => ({ ...preState, dob: "" }));
     genders === ""
       ? setError((preState) => ({ ...preState, gender: "Gender Needed" }))
       : setError((preState) => ({ ...preState, gender: "" }));
-    startDates === ""
+    startDate === ""
       ? setError((preState) => ({
-          ...preState,
-          startDate: "Start Date Needed",
-        }))
+        ...preState,
+        startDate: "Start Date Needed",
+      }))
       : setError((preState) => ({ ...preState, startDate: "" }));
 
-    console.log(noMatchData);
-
     setUserPass(passportNumberRef);
+    let dobs = moment(dob).format("DD/MM/YYYY");
+    let startDates = moment(startDate).format("DD/MM/YY");
+    console.log(dobs, startDates);
 
     onSubmitForm(
       familyNameControls,
@@ -89,11 +95,11 @@ export default function Form({ onSubmitForm, noMatchData }) {
   return (
     <>
       {error.fName ||
-      error.passportNum ||
-      error.dob ||
-      error.nationality ||
-      error.gender ||
-      error.startDate || noMatchData ? (
+        error.passportNum ||
+        error.dob ||
+        error.nationality ||
+        error.gender ||
+        error.startDate || noMatchData ? (
         <div className={styles.error}>
           <ul>
             {error.fName ? <li>{error.fName}</li> : <></>}
@@ -102,7 +108,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
             {error.dob ? <li>{error.dob}</li> : <></>}
             {error.gender ? <li>{error.gender}</li> : <></>}
             {error.startDate ? <li>{error.startDate}</li> : <></>}
-            {noMatchData ? <li>{noMatchData}</li>: <></>}
+            {noMatchData ? <li>{noMatchData}</li> : <></>}
           </ul>
         </div>
       ) : (
@@ -112,8 +118,8 @@ export default function Form({ onSubmitForm, noMatchData }) {
       <form onSubmit={handleSubmit}>
         <fieldset className={styles.form}>
           <legend>Visa Verification Enquiry</legend>
-          <div>
-            <label C="innerContainer_mainContent_FamilyNameControl">
+          <div className={styles.div}>
+            <label htmlFor="innerContainer_mainContent_FamilyNameControl">
               Family Name<span>*</span>
             </label>
             <input
@@ -126,7 +132,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
             />
           </div>
 
-          <div className={styles.hasButton}>
+          <div className={`${styles.hasButton} ${styles.div}`}>
             <label htmlFor="innerContainer_mainContent_NationalityControl">
               Passport Nationality<span>*</span>
             </label>
@@ -181,181 +187,181 @@ export default function Form({ onSubmitForm, noMatchData }) {
               <option value="Chad">Chad</option>
               <option value="Chile">Chile</option>
               <option value="China">China</option>
-              <option value="47">Colombia</option>
-              <option value="48">Comoros</option>
-              <option value="49">Congo</option>
-              <option value="51">Costa Rica</option>
-              <option value="52">Croatia</option>
-              <option value="53">Cuba</option>
-              <option value="54">Cyprus</option>
-              <option value="55">Czech Republic</option>
-              <option value="58">Democratic Republic of Congo</option>
-              <option value="59">Denmark</option>
-              <option value="60">Djibouti</option>
-              <option value="61">Dominica</option>
-              <option value="62">Dominican Republic</option>
-              <option value="65">Ecuador</option>
-              <option value="66">Egypt</option>
-              <option value="67">El Salvador</option>
-              <option value="68">Equitorial Guinea</option>
-              <option value="69">Eritrea</option>
-              <option value="70">Estonia</option>
-              <option value="71">Ethiopia</option>
-              <option value="72">European Commission</option>
-              <option value="73">Faeroe Islands</option>
-              <option value="75">Federated States of Micronesia</option>
-              <option value="76">Fiji</option>
-              <option value="77">Finland</option>
-              <option value="78">France</option>
-              <option value="81">Gabon</option>
-              <option value="82">Gambia</option>
-              <option value="83">Georgia</option>
-              <option value="84">Germany</option>
-              <option value="85">Ghana</option>
-              <option value="87">Great Britain</option>
-              <option value="88">Greece</option>
-              <option value="89">Greenland</option>
-              <option value="90">Grenada</option>
-              <option value="91">Guadeloupe</option>
-              <option value="92">Guam</option>
-              <option value="93">Guatemala</option>
-              <option value="94">Guinea</option>
-              <option value="95">Guinea - Bissau</option>
-              <option value="96">Guyana</option>
-              <option value="97">Haiti</option>
-              <option value="98">Honduras</option>
-              <option value="99">Hong Kong</option>
-              <option value="100">Hungary</option>
-              <option value="101">Iceland</option>
-              <option value="Indian">India</option>
-              <option value="103">Indonesia</option>
-              <option value="104">Iran</option>
-              <option value="105">Iraq</option>
-              <option value="106">Ireland</option>
-              <option value="107">Israel</option>
-              <option value="108">Italy</option>
-              <option value="109">Ivory Coast</option>
-              <option value="110">Jamaica</option>
-              <option value="111">Japan</option>
-              <option value="112">Jordan</option>
-              <option value="113">Kazakhstan</option>
-              <option value="114">Kenya</option>
-              <option value="115">Kiribati</option>
-              <option value="116">Kosovo - Republic of</option>
-              <option value="117">Kosovo - UN Mission in</option>
-              <option value="118">Kuwait</option>
-              <option value="119">Kyrgyzstan</option>
-              <option value="120">Laos</option>
-              <option value="121">Latvia</option>
-              <option value="122">Lebanon</option>
-              <option value="123">Lesotho</option>
-              <option value="124">Liberia</option>
-              <option value="125">Libya</option>
-              <option value="126">Liechtenstein</option>
-              <option value="127">Lithuania</option>
-              <option value="128">Luxembourg</option>
-              <option value="129">Macau</option>
-              <option value="130">Macedonia</option>
-              <option value="132">Madagascar</option>
-              <option value="133">Malawi</option>
-              <option value="134">Malaysia</option>
-              <option value="135">Maldives</option>
-              <option value="136">Mali</option>
-              <option value="137">Malta</option>
-              <option value="138">Marshall Islands</option>
-              <option value="139">Martinique</option>
-              <option value="140">Mauritania</option>
-              <option value="141">Mauritius</option>
-              <option value="142">Mayotte</option>
-              <option value="143">Mexico</option>
-              <option value="144">Moldova</option>
-              <option value="145">Monaco</option>
-              <option value="146">Mongolia</option>
-              <option value="147">Montenegro</option>
-              <option value="148">Montserrat</option>
-              <option value="149">Morocco</option>
-              <option value="150">Mozambique</option>
-              <option value="151">Myanmar</option>
-              <option value="152">Namibia</option>
-              <option value="153">Nauru</option>
-              <option value="154">Nepal</option>
-              <option value="155">Netherlands</option>
-              <option value="156">Netherlands Antilles</option>
-              <option value="159">Nicaragua</option>
-              <option value="160">Niger</option>
-              <option value="161">Nigeria</option>
-              <option value="164">North Korea</option>
-              <option value="165">Northern Mariana Islands</option>
-              <option value="166">Norway</option>
-              <option value="168">Oman</option>
-              <option value="170">Pakistan</option>
-              <option value="171">Palau</option>
-              <option value="172">Palestine</option>
-              <option value="174">Panama</option>
-              <option value="175">Papua New Guinea</option>
-              <option value="176">Paraguay</option>
-              <option value="177">Peru</option>
-              <option value="178">Philippines</option>
-              <option value="179">Pitcairn Islands</option>
-              <option value="180">Poland</option>
-              <option value="181">Portugal</option>
-              <option value="182">Puerto Rico</option>
-              <option value="183">Qatar</option>
-              <option value="184">Reunion</option>
-              <option value="185">Romania</option>
-              <option value="186">Russia</option>
-              <option value="187">Rwanda</option>
-              <option value="188">Samoa</option>
-              <option value="189">San Marino</option>
-              <option value="190">Sao Tome &amp; Principe</option>
-              <option value="191">Saudi Arabia</option>
-              <option value="192">Senegal</option>
-              <option value="193">Serbia</option>
-              <option value="194">Serbia &amp; Montenegro</option>
-              <option value="196">Seychelles</option>
-              <option value="197">Sierra Leone</option>
-              <option value="198">Singapore</option>
-              <option value="199">Slovakia</option>
-              <option value="200">Slovenia</option>
-              <option value="201">Solomon Islands</option>
-              <option value="202">Somalia</option>
-              <option value="203">South Africa</option>
-              <option value="204">South Korea</option>
-              <option value="205">South Pacific commission</option>
-              <option value="259">South Sudan</option>
-              <option value="206">Soviet Union</option>
-              <option value="207">Spain</option>
-              <option value="208">Sri Lanka</option>
-              <option value="210">St Kitts - Nevis</option>
-              <option value="211">St Lucia</option>
-              <option value="213">St Vincent and the Grenadines</option>
-              <option value="216">Sudan</option>
-              <option value="217">Suriname</option>
-              <option value="218">Swaziland</option>
-              <option value="219">Sweden</option>
-              <option value="220">Switzerland</option>
-              <option value="221">Syria</option>
-              <option value="222">Taiwan</option>
-              <option value="223">Tajikistan</option>
-              <option value="224">Tanzania</option>
-              <option value="225">Thailand</option>
-              <option value="226">Timor Leste</option>
-              <option value="227">Togo</option>
-              <option value="229">Tonga</option>
-              <option value="230">Trinidad and Tobago</option>
-              <option value="231">Tunisia</option>
-              <option value="232">Turkemenistan</option>
-              <option value="233">Turkey</option>
-              <option value="235">Tuvalu</option>
-              <option value="236">Uganda</option>
-              <option value="237">Ukraine</option>
-              <option value="238">United Arab Emirates</option>
-              <option value="239">United Nations</option>
-              <option value="240">United States of America</option>
-              <option value="242">Uruguay</option>
-              <option value="245">Uzbekistan</option>
-              <option value="246">Vanuatu</option>
-              <option value="247">Vatican City</option>
+              <option value="Colombia">Colombia</option>
+              <option value="Comoros">Comoros</option>
+              <option value="Congo">Congo</option>
+              <option value="Costa Rica">Costa Rica</option>
+              <option value="Croatia">Croatia</option>
+              <option value="Cuba">Cuba</option>
+              <option value="Cyprus">Cyprus</option>
+              <option value="Czech Republic">Czech Republic</option>
+              <option value="Democratic Republic of Congo">Democratic Republic of Congo</option>
+              <option value="Denmark">Denmark</option>
+              <option value="Djibouti">Djibouti</option>
+              <option value="Dominica">Dominica</option>
+              <option value="Dominican Republic">Dominican Republic</option>
+              <option value="Ecuador">Ecuador</option>
+              <option value="Egypt">Egypt</option>
+              <option value="El Salvador">El Salvador</option>
+              <option value="Equitorial Guinea">Equitorial Guinea</option>
+              <option value="Eritrea">Eritrea</option>
+              <option value="Estonia">Estonia</option>
+              <option value="Ethiopia">Ethiopia</option>
+              <option value="European Commissio">European Commission</option>
+              <option value="Faeroe Islands">Faeroe Islands</option>
+              <option value="Federated States of Micronesi">Federated States of Micronesia</option>
+              <option value="Fiji">Fiji</option>
+              <option value="Finland">Finland</option>
+              <option value="France">France</option>
+              <option value="Gabon">Gabon</option>
+              <option value="Gambia">Gambia</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Germany">Germany</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Great Britain">Great Britain</option>
+              <option value="Greece">Greece</option>
+              <option value="Greenland">Greenland</option>
+              <option value="Grenada">Grenada</option>
+              <option value="Guadeloupe">Guadeloupe</option>
+              <option value="Guam">Guam</option>
+              <option value="Guatemala">Guatemala</option>
+              <option value="Guinea">Guinea</option>
+              <option value="Guinea - Bissau">Guinea - Bissau</option>
+              <option value="Guyana">Guyana</option>
+              <option value="Haiti">Haiti</option>
+              <option value="Honduras">Honduras</option>
+              <option value="Hong Kong">Hong Kong</option>
+              <option value="Hungary">Hungary</option>
+              <option value="Iceland">Iceland</option>
+              <option value="India">India</option>
+              <option value="Indonesia">Indonesia</option>
+              <option value="Iran">Iran</option>
+              <option value="Iraq">Iraq</option>
+              <option value="Ireland">Ireland</option>
+              <option value="Israel">Israel</option>
+              <option value="Italy">Italy</option>
+              <option value="Ivory Coast">Ivory Coast</option>
+              <option value="Jamaica">Jamaica</option>
+              <option value="Japan">Japan</option>
+              <option value="Jordan">Jordan</option>
+              <option value="Kazakhstan">Kazakhstan</option>
+              <option value="Kenya">Kenya</option>
+              <option value="Kiribati">Kiribati</option>
+              <option value="Kosovo - Republic of">Kosovo - Republic of</option>
+              <option value="Kosovo - UN Mission in">Kosovo - UN Mission in</option>
+              <option value="Kuwait">Kuwait</option>
+              <option value="Kyrgyzstan">Kyrgyzstan</option>
+              <option value="Laos">Laos</option>
+              <option value="Latvia">Latvia</option>
+              <option value="Lebanon">Lebanon</option>
+              <option value="Lesotho">Lesotho</option>
+              <option value="Liberia">Liberia</option>
+              <option value="Libya">Libya</option>
+              <option value="Liechtenstein">Liechtenstein</option>
+              <option value="Lithuania">Lithuania</option>
+              <option value="Luxembourg">Luxembourg</option>
+              <option value="Macau">Macau</option>
+              <option value="Macedonia">Macedonia</option>
+              <option value="Madagascar">Madagascar</option>
+              <option value="Malawi">Malawi</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Maldives">Maldives</option>
+              <option value="Mali">Mali</option>
+              <option value="Malta">Malta</option>
+              <option value="Marshall Islands">Marshall Islands</option>
+              <option value="Martinique">Martinique</option>
+              <option value="Mauritania">Mauritania</option>
+              <option value="Mauritius">Mauritius</option>
+              <option value="Mayotte">Mayotte</option>
+              <option value="Mexico">Mexico</option>
+              <option value="Moldova">Moldova</option>
+              <option value="Monaco">Monaco</option>
+              <option value="Mongolia">Mongolia</option>
+              <option value="Montenegro">Montenegro</option>
+              <option value="Montserrat">Montserrat</option>
+              <option value="Morocco">Morocco</option>
+              <option value="Mozambique">Mozambique</option>
+              <option value="Myanmar">Myanmar</option>
+              <option value="Namibia">Namibia</option>
+              <option value="Nauru">Nauru</option>
+              <option value="Nepal">Nepal</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="Netherlands Antilles">Netherlands Antilles</option>
+              <option value="Nicaragua">Nicaragua</option>
+              <option value="Niger">Niger</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="North Korea">North Korea</option>
+              <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+              <option value="Norway">Norway</option>
+              <option value="Oman">Oman</option>
+              <option value="Pakistan">Pakistan</option>
+              <option value="Palau">Palau</option>
+              <option value="Palestine">Palestine</option>
+              <option value="Panama">Panama</option>
+              <option value="Papua New Guinea">Papua New Guinea</option>
+              <option value="Paraguay">Paraguay</option>
+              <option value="Peru">Peru</option>
+              <option value="Philippines">Philippines</option>
+              <option value="Pitcairn Islands">Pitcairn Islands</option>
+              <option value="Poland">Poland</option>
+              <option value="Portugal">Portugal</option>
+              <option value="Puerto Rico">Puerto Rico</option>
+              <option value="Qatar">Qatar</option>
+              <option value="Reunion">Reunion</option>
+              <option value="Romania">Romania</option>
+              <option value="Russia">Russia</option>
+              <option value="Rwanda">Rwanda</option>
+              <option value="Samoa">Samoa</option>
+              <option value="San Marino">San Marino</option>
+              <option value="Sao Tome &amp; Principe">Sao Tome &amp; Principe</option>
+              <option value="Saudi Arabia">Saudi Arabia</option>
+              <option value="Senegal">Senegal</option>
+              <option value="Serbia">Serbia</option>
+              <option value="Serbia &amp; Montenegro">Serbia &amp; Montenegro</option>
+              <option value="Seychelles">Seychelles</option>
+              <option value="Sierra Leone">Sierra Leone</option>
+              <option value="Singapore">Singapore</option>
+              <option value="Slovakia">Slovakia</option>
+              <option value="Slovenia">Slovenia</option>
+              <option value="Solomon Islands">Solomon Islands</option>
+              <option value="Somalia">Somalia</option>
+              <option value="South Africa">South Africa</option>
+              <option value="South Korea">South Korea</option>
+              <option value="South Pacific commission">South Pacific commission</option>
+              <option value="South Sudan">South Sudan</option>
+              <option value="Soviet Union">Soviet Union</option>
+              <option value="Spain">Spain</option>
+              <option value="Sri Lanka">Sri Lanka</option>
+              <option value="St Kitts - Nevis">St Kitts - Nevis</option>
+              <option value="St Lucia">St Lucia</option>
+              <option value="St Vincent and the Grenadines">St Vincent and the Grenadines</option>
+              <option value="Sudan">Sudan</option>
+              <option value="Suriname">Suriname</option>
+              <option value="Swaziland">Swaziland</option>
+              <option value="Sweden">Sweden</option>
+              <option value="Switzerland">Switzerland</option>
+              <option value="Syria">Syria</option>
+              <option value="Taiwan">Taiwan</option>
+              <option value="Tajikistan">Tajikistan</option>
+              <option value="Tanzania">Tanzania</option>
+              <option value="Thailand">Thailand</option>
+              <option value="Timor Leste">Timor Leste</option>
+              <option value="Togo">Togo</option>
+              <option value="Tonga">Tonga</option>
+              <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+              <option value="Tunisia">Tunisia</option>
+              <option value="Turkemenistan">Turkemenistan</option>
+              <option value="Turkey">Turkey</option>
+              <option value="Tuvalu">Tuvalu</option>
+              <option value="Uganda">Uganda</option>
+              <option value="Ukraine">Ukraine</option>
+              <option value="United Arab Emirates">United Arab Emirates</option>
+              <option value="United Nations">United Nations</option>
+              <option value="United States of America">United States of America</option>
+              <option value="Uruguay">Uruguay</option>
+              <option value="Uzbekistan">Uzbekistan</option>
+              <option value="Vanuatu">Vanuatu</option>
+              <option value="Vatican City">Vatican City</option>
               <option value="Venezuela">Venezuela</option>
               <option value="Vietnam">Vietnam</option>
               <option value="Western Sahara">Western Sahara</option>
@@ -366,7 +372,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
             </select>
           </div>
 
-          <div>
+          <div className={styles.div}>
             <label htmlFor="innerContainer_mainContent_PassportNumberControl">
               Passport Number<span>*</span>
             </label>
@@ -381,19 +387,23 @@ export default function Form({ onSubmitForm, noMatchData }) {
             />
           </div>
 
-          <div className={styles.dob}>
+          <div className={`${styles.dob} ${styles.div}`}>
             <label htmlFor="innerContainer_mainContent_DateOfBirthControl">
               Date of Birth <br /> dd/mm/yy<span>*</span>
             </label>
-            <input
+            {/*<input
               name="ctl00$ctl00$innerContainer$mainContent$DateOfBirthControl"
-              type="text"
+              type="date"
+              placeholder=" "
               id="innerContainer_mainContent_DateOfBirthControl"
               tabIndex="4"
               className={styles.medium}
               ref={dob}
-              placeholder=""
-            />
+      />*/}
+            <div className={styles.datepicker}>
+              <DatePicker dateFormat="dd/MM/yyyy" onChange={(date) => setDob(date)} selected={dob} wrapperClassName={styles.datePickerwrapper} className={styles.medium} />
+            </div>
+
             <Link href="#">
               <Image
                 src="/images/icon-calendar.gif"
@@ -405,7 +415,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
             </Link>
           </div>
 
-          <div>
+          <div className={`${styles.div}`}>
             <label htmlFor="innerContainer_mainContent_GenderControl">
               Gender<span>*</span>
             </label>
@@ -422,19 +432,23 @@ export default function Form({ onSubmitForm, noMatchData }) {
             </select>
           </div>
 
-          <div className={styles.dob}>
+          <div className={`${styles.dob} ${styles.div}`}>
             <label htmlFor="innerContainer_mainContent_VisaStartDateControl">
               Visa Start Date
               <br /> dd/mm/yy<span>*</span>
             </label>
-            <input
+            {/*<input
               name="ctl00$ctl00$innerContainer$mainContent$VisaStartDateControl"
               type="text"
               id="innerContainer_mainContent_VisaStartDateControl"
               tabIndex="6"
               className={styles.medium}
               ref={startDate}
-            />
+    />*/}
+
+            <div className={styles.datepicker}>
+              <DatePicker preventOpenOnFocus="false" dateFormat="dd/MM/yy" onChange={(date) => setStartDate(date)} selected={startDate} wrapperClassName={styles.datePickerwrapper} className={styles.medium} />
+            </div>
 
             <Link href="#">
               <Image
@@ -447,7 +461,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
             </Link>
           </div>
 
-          <div className={styles.visaconsent}>
+          <div className={`${styles.visaconsent} ${styles.div}`}>
             <input
               id="innerContainer_mainContent_chkVisaConsent"
               type="checkbox"
@@ -459,7 +473,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
             </label>
           </div>
         </fieldset>
-        <div className={styles.buttons}>
+        <div className={`${styles.buttons} ${styles.div}`}>
           <div>
             <span className={styles.btnCorner1}></span>
             <input

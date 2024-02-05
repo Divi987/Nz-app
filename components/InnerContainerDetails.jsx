@@ -147,7 +147,7 @@ export default function InnerContainerDetails() {
         <div className={styles.form}>
           <div
             id="innerContainer_mainContent_leftColumn"
-            className={styles.column}
+            className={`${styles.column} ${styles.div}`}
           >
             <div>
               <span className={styles.fauxLabel}>Family, First Name</span>
@@ -176,7 +176,7 @@ export default function InnerContainerDetails() {
           </div>
           <div
             id="innerContainer_mainContent_rightColumn"
-            className={styles.column}
+            className={`${styles.column} ${styles.div}`}
           >
             <div>
               <span className={styles.fauxLabel}>Visa Type</span>
@@ -203,7 +203,7 @@ export default function InnerContainerDetails() {
               <span>{expiryDate}</span>
             </div>
           </div>
-          <div id="innerContainer_mainContent_bottomRow">
+          <div id="innerContainer_mainContent_bottomRow" className={styles.div}>
             <div>
               <span className={styles.fauxLabel}>Visa Conditions</span>
               <span>
@@ -253,6 +253,7 @@ export default function InnerContainerDetails() {
                   id="innerContainer_mainContent_btnDownloadHistory"
                   tabIndex="9"
                   target="_blank"
+                  download="visa"
                   href={pdfLink!==null ?pdfLink :"#" }
                 >Download Result </Link>
                 <span className={styles.btnCorner2}></span>
