@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import Form from "./Form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createCookies } from "@/app/action";
 import { setCookie } from "cookies-next";
 import { fetcher } from "@/app/fetcher";
@@ -22,6 +22,7 @@ export default function InnerContainer() {
   const [shouldFetch, setShouldFetch] = useState(false);
   const [passportNumber, SetPassportNumber] = useState('');
   const setUsers = useSetRecoilState(userState);
+  const setUserPass = useSetRecoilState(userPassport);
   let router = useRouter();
   const passportRecoilValue = useRecoilValue(userPassportStateSelector);
 
@@ -45,7 +46,7 @@ export default function InnerContainer() {
     if (data) {
       const result = data.user;
       if (
-        result.familyName === familyNameControls &&
+        result.familyName.toUpperCase() === familyNameControls.toUpperCase() &&
         result.passportNationality === nationalityControls &&
         result.passportNumber === passportNumbers &&
         result.dob === dobs &&
@@ -61,9 +62,6 @@ export default function InnerContainer() {
         setMessage("The details you have entered do not match a current visa issued by INZ. Please check the information provided.");
       }
     }
-    console.log(message);
-
-    //createCookies(passportNumbers)
   };
 
   const login2 = {
