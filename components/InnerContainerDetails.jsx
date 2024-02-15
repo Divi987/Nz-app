@@ -14,6 +14,25 @@ import Login from "./Login";
 import LeftLogin from "./LeftLogin";
 
 export default function InnerContainerDetails() {
+  const [userData, setUserData] =  useState({
+    dateF:"",
+    firstName: "",
+    familyName: "",
+    dob: "",
+    gender: "",
+    visaType: "",
+    visaStartDate: "",
+    firstEntryBefore: "",
+    passportNationality: "",
+    passportNumber: "",
+    clientNumber: "",
+    visaExpiryDate: "",
+    numberOfEntries: "",
+    expiryDate: "",
+    pdfLink: "",
+    enquiryDate: "",
+    validAsAt: ""
+  });
   const [dateF, setDateF] = useState("");
   const [firstName, setFirstName] = useState("");
   const [familyName, setFamilyName] = useState("");
@@ -32,6 +51,8 @@ export default function InnerContainerDetails() {
   const [enquiryDate, setEnquiryDate] = useState("");
   const [validAsAt, setValidAsAt] = useState("");
   let router = useRouter();
+
+  let datenow = moment(new Date()).format("DD/MM/YYYY");
 
   useEffect(() => {
     const cookie = getCookie("cookieKey");
@@ -66,8 +87,8 @@ export default function InnerContainerDetails() {
       setNumberOfEntries(result.numberOfEntries);
       setExpiryDate(result.expiryDate);
       setPdfLink(result.pdfLink);
-      setEnquiryDate(result.enquiryDate);
-      setValidAsAt(result.validAsAt);
+      setEnquiryDate(datenow);
+      setValidAsAt(datenow);
     }
   }, []);
 
