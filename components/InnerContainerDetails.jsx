@@ -171,7 +171,7 @@ export default function InnerContainerDetails() {
             <div>
               <span className={styles.fauxLabel}>Family, First Name</span>
               <span>
-                {firstName}, {familyName}
+                {familyName}, {firstName}
               </span>
             </div>
             <div>
@@ -240,14 +240,14 @@ export default function InnerContainerDetails() {
                 shall not study for more than 3 months in every 12 month period
                 in NZ. .The holder shall not undertake employment in NZ..The
                 last date you may travel and re-enter New Zealand is 01 May
-                2024..The start date of this visa is {dateF}..Thi
+                2024..The start date of this visa is {dateF}.
               </span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Enquiry Date</span>
               <span>{enquiryDate}</span>
             </div>
-            <div>
+            <div className={`clear-both`}>
               <span className={styles.fauxLabel}>Valid as at</span>
               <span>{validAsAt}</span>
             </div>
