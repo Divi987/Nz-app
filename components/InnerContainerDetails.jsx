@@ -50,9 +50,13 @@ export default function InnerContainerDetails() {
   const [pdfLink, setPdfLink] = useState("#");
   const [enquiryDate, setEnquiryDate] = useState("");
   const [validAsAt, setValidAsAt] = useState("");
+  const [visaCondition, setVisaCondition] = useState("");
+  const [reEntryDate, setReEntryDate] = useState("");
   let router = useRouter();
 
   let datenow = moment(new Date()).format("DD/MM/YYYY");
+  let workVisaCond = "Financial support evidence not required..May not be placed in a triangular employment arrangement with a controlling third party..Must be paid at or above $ 29.66 per hour..Must provide evidence of remuneration if requested..Return/onward ticket not required..Stay subject to grant of entry permission..The holder may only work as Retail Assistant in Auckland for EXPRESS MART LIMITED..The holder of this visa must comply with any instruction from a Medical Officer of Health which relates to a notifiable or quarantinable disease..The holder of this visa must comply with any order made under section 11 of the COVID-19 Public Health Response Act 2020..The holder of this visa must comply with any order made under section 70 of the Health Act 1956 and listed in schedule 2 of the COVID-19 Public He.."
+  let visitorVisaCond = `On each entry into New Zealand you can stay up to 6 months at a time..Stay subject to grant of entry permission..The holder of this visa must comply with any instruction from a Medical Officer of Health which relates to a notifiable or quarantinable disease..The holder of this visa must comply with any order made under section 11 of the COVID-19 Public Health Response Act 2020..The holder of this visa must comply with any order made under section 70 of the Health Act 1956 and listed in schedule 2 of the COVID-19 Public Health Response Act 2020..The holder shall not study for more than 3 months in every 12 month period in NZ. .The holder shall not undertake employment in NZ..The last date you may travel and re-enter New Zealand is ${reEntryDate}..The start date of this visa is ${dateF}`
 
   useEffect(() => {
     const cookie = getCookie("cookieKey");
@@ -66,13 +70,23 @@ export default function InnerContainerDetails() {
       var date1 = moment(result.visaStartDate, "DD-MM-YYYY").format(
         "Do MMMM YYYY"
       );
+      let reEntryExpDate = moment(result.visaExpiryDate, "DD-MM-YYYY").format(
+        "Do MMMM YYYY"
+      )
       setDateF(date1);
+      setReEntryDate(reEntryExpDate);
       //}
 
       //if (result && hasCookieExp===true ){
 
       // let result = data.user;
       let resultGender = result.gender.substring(0, 1);
+      if (result.visaType === "Work") {
+        setVisaCondition(workVisaCond);
+      } else {
+        setVisaCondition(visitorVisaCond);
+      }
+
       setFirstName(result.firstName);
       setFamilyName(result.familyName);
       setDob(result.dob);
@@ -90,7 +104,7 @@ export default function InnerContainerDetails() {
       setEnquiryDate(datenow);
       setValidAsAt(datenow);
     }
-  }, []);
+  }, [dateF, reEntryDate]);
 
   return (
     <div className={styles.innercontainer}>
@@ -228,19 +242,7 @@ export default function InnerContainerDetails() {
             <div>
               <span className={styles.fauxLabel}>Visa Conditions</span>
               <span>
-                On each entry into New Zealand you can stay up to 6 months at a
-                time..Stay subject to grant of entry permission..The holder of
-                this visa must comply with any instruction from a Medical
-                Officer of Health which relates to a notifiable or quarantinable
-                disease..The holder of this visa must comply with any order made
-                under section 11 of the COVID-19 Public Health Response Act
-                2020..The holder of this visa must comply with any order made
-                under section 70 of the Health Act 1956 and listed in schedule 2
-                of the COVID-19 Public Health Response Act 2020..The holder
-                shall not study for more than 3 months in every 12 month period
-                in NZ. .The holder shall not undertake employment in NZ..The
-                last date you may travel and re-enter New Zealand is 01 May
-                2024..The start date of this visa is {dateF}.
+                {visaCondition}
               </span>
             </div>
             <div>
