@@ -12,10 +12,14 @@ import moment from "moment";
 import SideView from "./SideView";
 import Login from "./Login";
 import LeftLogin from "./LeftLogin";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { userStateSelector } from "@/recoil/selectors/selectors";
+import { userState } from "@/recoil/atoms/states";
+import { fetchItemDetails } from "@/lib/api/fetchReq";
 
 export default function InnerContainerDetails() {
-  const [userData, setUserData] =  useState({
-    dateF:"",
+  const [userData, setUserData] = useState({
+    dateF: "",
     firstName: "",
     familyName: "",
     dob: "",
@@ -31,7 +35,7 @@ export default function InnerContainerDetails() {
     expiryDate: "",
     pdfLink: "",
     enquiryDate: "",
-    validAsAt: ""
+    validAsAt: "",
   });
   const [dateF, setDateF] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -52,21 +56,84 @@ export default function InnerContainerDetails() {
   const [validAsAt, setValidAsAt] = useState("");
   const [visaCondition, setVisaCondition] = useState("");
   const [reEntryDate, setReEntryDate] = useState("");
+  const userRecoilValue = useRecoilValue(userStateSelector);
+  const [data, setData] = useState();
+  const [shouldFetch, setShouldFetch] = useState(false);
   let router = useRouter();
+  const setUsers = useSetRecoilState(userState);
 
   let datenow = moment(new Date()).format("DD/MM/YYYY");
-  let workVisaCond = "Financial support evidence not required..May not be placed in a triangular employment arrangement with a controlling third party..Must be paid at or above $ 29.66 per hour..Must provide evidence of remuneration if requested..Return/onward ticket not required..Stay subject to grant of entry permission..The holder may only work as Retail Assistant in Auckland for EXPRESS MART LIMITED..The holder of this visa must comply with any instruction from a Medical Officer of Health which relates to a notifiable or quarantinable disease..The holder of this visa must comply with any order made under section 11 of the COVID-19 Public Health Response Act 2020..The holder of this visa must comply with any order made under section 70 of the Health Act 1956 and listed in schedule 2 of the COVID-19 Public He.."
-  let visitorVisaCond = `On each entry into New Zealand you can stay up to 6 months at a time..Stay subject to grant of entry permission..The holder of this visa must comply with any instruction from a Medical Officer of Health which relates to a notifiable or quarantinable disease..The holder of this visa must comply with any order made under section 11 of the COVID-19 Public Health Response Act 2020..The holder of this visa must comply with any order made under section 70 of the Health Act 1956 and listed in schedule 2 of the COVID-19 Public Health Response Act 2020..The holder shall not study for more than 3 months in every 12 month period in NZ. .The holder shall not undertake employment in NZ..The last date you may travel and re-enter New Zealand is ${reEntryDate}..The start date of this visa is ${dateF}`
+  let workVisaCond =
+    "Financial support evidence not required..May not be placed in a triangular employment arrangement with a controlling third party..Must be paid at or above $ 29.66 per hour..Must provide evidence of remuneration if requested..Return/onward ticket not required..Stay subject to grant of entry permission..The holder may only work as Retail Assistant in Auckland for EXPRESS MART LIMITED..The holder of this visa must comply with any instruction from a Medical Officer of Health which relates to a notifiable or quarantinable disease..The holder of this visa must comply with any order made under section 11 of the COVID-19 Public Health Response Act 2020..The holder of this visa must comply with any order made under section 70 of the Health Act 1956 and listed in schedule 2 of the COVID-19 Public He..";
+  let visitorVisaCond = `On each entry into New Zealand you can stay up to 6 months at a time..Stay subject to grant of entry permission..The holder of this visa must comply with any instruction from a Medical Officer of Health which relates to a notifiable or quarantinable disease..The holder of this visa must comply with any order made under section 11 of the COVID-19 Public Health Response Act 2020..The holder of this visa must comply with any order made under section 70 of the Health Act 1956 and listed in schedule 2 of the COVID-19 Public Health Response Act 2020..The holder shall not study for more than 3 months in every 12 month period in NZ. .The holder shall not undertake employment in NZ..The last date you may travel and re-enter New Zealand is ${reEntryDate}..The start date of this visa is ${dateF}`;
+
+  const fetchData = async (passportCookieValue) => {
+    let fetchDatas = await fetchItemDetails(passportCookieValue);
+    setUsers(fetchDatas.user);
+    let result =
+      Object.keys(userRecoilValue).length === 0
+        ? fetchDatas.user
+        : userRecoilValue;
+        console.log(fetchDatas)
+    var date1 = moment(result.visaStartDate, "DD-MM-YYYY").format(
+      "Do MMMM YYYY"
+    );
+    let reEntryExpDate = moment(result.visaExpiryDate, "DD-MM-YYYY").format(
+      "Do MMMM YYYY"
+    );
+    let resultGender = result.gender.substring(0, 1);
+    //let resultGender= resultGenders.substring(0, 1);
+    setDateF(date1);
+    setReEntryDate(reEntryExpDate);
+
+    if (result.visaType === "Work") {
+      setVisaCondition(workVisaCond);
+    } else {
+      setVisaCondition(visitorVisaCond);
+    }
+
+    setFirstName(result.firstName);
+    setFamilyName(result.familyName);
+    setDob(result.dob);
+    setGender(resultGender);
+    setVisaType(result.visaType);
+    setVisaStartDate(result.visaStartDate);
+    setFirstEntryBefore(result.firstEntryBefore);
+    setPassportNationality(result.passportNationality);
+    setPassportNumber(result.passportNumber);
+    setClientNumber(result.clientNumber);
+    setVisaExpiryDate(result.visaExpiryDate);
+    setNumberOfEntries(result.numberOfEntries);
+    setExpiryDate(result.expiryDate);
+    setPdfLink(result.pdfLink);
+    setEnquiryDate(datenow);
+    setValidAsAt(datenow);
+
+    return fetchDatas;
+  };
+
+  const lenValue = Object.keys(userRecoilValue).length
 
   useEffect(() => {
+    //setData(userRecoilValue);
     const cookie = getCookie("cookieKey");
+    const pCookie = getCookie("pKey");
+
     let hasCookieExp = hasCookie("cookieKey");
+    let hasPCookieExp = hasCookie("pKey");
+    let ObjectLength = Object.keys(userRecoilValue).length;
 
     if (!hasCookieExp) {
       deleteCookie("cookieKey");
       router.push("/workentitlement/visaVerificationEnquiry.aspx");
     } else {
-      let result = JSON.parse(cookie);
+      const passportCookieValue = JSON.parse(pCookie);
+      
+      fetchData(passportCookieValue);
+      lenValue===0 ? setShouldFetch(true) : setShouldFetch(false);
+      //const result = fetchData(passportCookieValue)
+      //console.log(result)
+      /* let result = JSON.parse(cookie);
       var date1 = moment(result.visaStartDate, "DD-MM-YYYY").format(
         "Do MMMM YYYY"
       );
@@ -102,7 +169,7 @@ export default function InnerContainerDetails() {
       setExpiryDate(result.expiryDate);
       setPdfLink(result.pdfLink);
       setEnquiryDate(datenow);
-      setValidAsAt(datenow);
+      setValidAsAt(datenow); */
     }
   }, [dateF, reEntryDate]);
 
@@ -184,29 +251,29 @@ export default function InnerContainerDetails() {
           >
             <div>
               <span className={styles.fauxLabel}>Family, First Name</span>
-              <span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>
                 {familyName}, {firstName}
               </span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Date of Birth</span>
-              <span>{dob}</span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{dob}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Gender</span>
-              <span>{gender}</span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{gender}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Passport Nationality</span>
-              <span>{passportNationality}</span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{passportNationality}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Passport Number</span>
-              <span>{passportNumber} </span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{passportNumber} </span>
             </div>
             <div>
               <span className={styles.fauxLabel}>INZ Client Number</span>
-              <span>{clientNumber}</span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{clientNumber}</span>
             </div>
           </div>
           <div
@@ -215,43 +282,41 @@ export default function InnerContainerDetails() {
           >
             <div>
               <span className={styles.fauxLabel}>Visa Type</span>
-              <span>{visaType}</span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{visaType}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Visa Start Date</span>
-              <span>{visaStartDate}</span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{visaStartDate}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>First Entry Before</span>
-              <span>{firstEntryBefore}</span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{firstEntryBefore}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Number of Entries</span>
-              <span>{numberOfEntries}</span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{numberOfEntries}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Expiry Date Travel</span>
-              <span>{visaExpiryDate}</span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{visaExpiryDate}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Visa Expiry</span>
-              <span>{expiryDate}</span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{expiryDate}</span>
             </div>
           </div>
           <div id="innerContainer_mainContent_bottomRow" className={styles.div}>
             <div>
               <span className={styles.fauxLabel}>Visa Conditions</span>
-              <span>
-                {visaCondition}
-              </span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForVC}` : ""}>{visaCondition}</span>
             </div>
             <div>
               <span className={styles.fauxLabel}>Enquiry Date</span>
-              <span>{enquiryDate}</span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{enquiryDate}</span>
             </div>
             <div className={`clear-both`}>
               <span className={styles.fauxLabel}>Valid as at</span>
-              <span>{validAsAt}</span>
+              <span className={shouldFetch ? `${styles.animatedBackground} ${styles.animatedBackgroundForD}` : ""}>{validAsAt}</span>
             </div>
           </div>
         </div>
