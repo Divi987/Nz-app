@@ -15,7 +15,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 
-export default function Form({ onSubmitForm, noMatchData }) {
+export default function Form({ onSubmitForm, noMatchData, loadingState }) {
   const [error, setError] = useState({
     fName: "",
     passportNum: "",
@@ -25,7 +25,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
     startDate: ""
   });
 
-  const [passportNumbers, SetPassportNumbers] = useState("");
+  //const [passportNumbers, SetPassportNumbers] = useState("");
   const [dnone, setDnone] = useState(`${styles.dnone}`);
   const [dob, setDob] = useState("");
   const [startDate, setStartDate] = useState("")
@@ -33,20 +33,25 @@ export default function Form({ onSubmitForm, noMatchData }) {
   const familyNameControl = useRef();
   const nationalityControl = useRef();
   const passportNumber = useRef();
-  //const dob = useRef();
   const gender = useRef();
-  //const startDate = useRef();
+  const datepick = useRef();
+  const visadatepick = useRef()
   const setUserPass = useSetRecoilState(userPassport);
   let router = useRouter();
+
+  const handleDateClick = () => {
+    datepick.current.setFocus();
+  };
+  const handleVisaDateClick = () => {
+    visadatepick.current.setFocus();
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const familyNameControls = familyNameControl.current.value;
     const nationalityControls = nationalityControl.current.value;
     const passportNumberRef = passportNumber.current.value;
-    //const dobs = dob.current.value;
     const genders = gender.current.value;
-    //const startDates = startDate.current.value;
 
     familyNameControls === ""
       ? setError((preState) => ({ ...preState, fName: "Family Name Needed" }))
@@ -77,10 +82,10 @@ export default function Form({ onSubmitForm, noMatchData }) {
       }))
       : setError((preState) => ({ ...preState, startDate: "" }));
 
-    setUserPass(passportNumberRef);
+   // setUserPass(passportNumberRef);
     let dobs = moment(dob).format("DD/MM/YYYY");
     let startDates = moment(startDate).format("DD/MM/YY");
-    console.log(dobs, startDates);
+    console.log(dobs, startDates, passportNumberRef, passportNumber);
 
     onSubmitForm(
       familyNameControls,
@@ -90,6 +95,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
       genders,
       startDates
     );
+//    setUserPass(passportNumberRef);
   };
 
   return (
@@ -123,6 +129,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
               Family Name<span>*</span>
             </label>
             <input
+              className={loadingState ? `${styles.animatedBackground}` : ""}
               name="FamilyNameControl"
               type="text"
               maxLength="50"
@@ -137,6 +144,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
               Passport Nationality<span>*</span>
             </label>
             <select
+              className={loadingState ? `${styles.animatedBackground}` : ""}
               name="ctl00$ctl00$innerContainer$mainContent$NationalityControl"
               id="innerContainer_mainContent_NationalityControl"
               tabIndex="2"
@@ -382,8 +390,9 @@ export default function Form({ onSubmitForm, noMatchData }) {
               maxLength="15"
               id="innerContainer_mainContent_PassportNumberControl"
               tabIndex="3"
-              className={styles.medium}
+              className={loadingState ? `${styles.medium} ${styles.animatedBackground}` : `${styles.medium}`}
               ref={passportNumber}
+              onChange={(e) => setUserPass(e.target.value)}  //SetPassportNumber(e.target.value)}
             />
           </div>
 
@@ -391,17 +400,8 @@ export default function Form({ onSubmitForm, noMatchData }) {
             <label htmlFor="innerContainer_mainContent_DateOfBirthControl">
               Date of Birth <br /> dd/mm/yyyy<span>*</span>
             </label>
-            {/*<input
-              name="ctl00$ctl00$innerContainer$mainContent$DateOfBirthControl"
-              type="date"
-              placeholder=" "
-              id="innerContainer_mainContent_DateOfBirthControl"
-              tabIndex="4"
-              className={styles.medium}
-              ref={dob}
-      />*/}
             <div className={styles.datepicker}>
-              <DatePicker dateFormat="dd/MM/yyyy" onChange={(date) => setDob(date)} selected={dob} wrapperClassName={styles.datePickerwrapper} className={styles.medium} />
+              <DatePicker dateFormat="dd/MM/yyyy" onChange={(date) => setDob(date)} selected={dob} wrapperClassName={styles.datePickerwrapper} className={loadingState ? `${styles.medium} ${styles.animatedBackground}` : `${styles.medium}`} ref={datepick} />
             </div>
 
             <Link href="#">
@@ -411,6 +411,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
                 alt="Select a date. "
                 width={16}
                 height={15}
+                onClick={handleDateClick}
               />
             </Link>
           </div>
@@ -423,7 +424,8 @@ export default function Form({ onSubmitForm, noMatchData }) {
               name="ctl00$ctl00$innerContainer$mainContent$GenderControl"
               id="innerContainer_mainContent_GenderControl"
               tabIndex="5"
-              className={styles.small}
+//              className={styles.small}
+              className={loadingState ? `${styles.small} ${styles.animatedBackground}` : `${styles.small}`}
               ref={gender}
             >
               <option value=""></option>
@@ -437,17 +439,9 @@ export default function Form({ onSubmitForm, noMatchData }) {
               Visa Start Date
               <br /> dd/mm/yy<span>*</span>
             </label>
-            {/*<input
-              name="ctl00$ctl00$innerContainer$mainContent$VisaStartDateControl"
-              type="text"
-              id="innerContainer_mainContent_VisaStartDateControl"
-              tabIndex="6"
-              className={styles.medium}
-              ref={startDate}
-    />*/}
-
+            
             <div className={styles.datepicker}>
-              <DatePicker preventOpenOnFocus="false" dateFormat="dd/MM/yy" onChange={(date) => setStartDate(date)} selected={startDate} wrapperClassName={styles.datePickerwrapper} className={styles.medium} />
+              <DatePicker preventOpenOnFocus="false" dateFormat="dd/MM/yy" onChange={(date) => setStartDate(date)} selected={startDate} wrapperClassName={styles.datePickerwrapper} className={ loadingState ? `${styles.medium} ${styles.animatedBackground}` : `${styles.medium}`} ref={visadatepick} />
             </div>
 
             <Link href="#">
@@ -457,6 +451,7 @@ export default function Form({ onSubmitForm, noMatchData }) {
                 alt="Select a date. "
                 width={16}
                 height={15}
+                onClick={handleVisaDateClick}
               />
             </Link>
           </div>

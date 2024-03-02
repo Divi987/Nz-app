@@ -16,22 +16,20 @@ import { userPassportStateSelector } from "@/recoil/selectors/selectors";
 import SideView from "./SideView";
 import Login from "./Login";
 import LeftLogin from "./LeftLogin";
+import { fetchItemDetails } from "@/lib/api/fetchReq";
+import apiUrl from "@/lib/api/apiUrl";
 
 export default function InnerContainer() {
   const [message, setMessage] = useState("");
   const [shouldFetch, setShouldFetch] = useState(false);
   const [passportNumber, SetPassportNumber] = useState('');
+  const [data, setData] = useState({});
   const setUsers = useSetRecoilState(userState);
   const setUserPass = useSetRecoilState(userPassport);
   let router = useRouter();
   const passportRecoilValue = useRecoilValue(userPassportStateSelector);
 
-  const { data, error, isLoading } = useSWR(
-    shouldFetch ? `/api/users/${passportRecoilValue}` : null,
-    fetcher
-  );
-
-  const onSubmitForm = (
+  const onSubmitForm = async (
     familyNameControls,
     nationalityControls,
     passportNumbers,
@@ -40,11 +38,12 @@ export default function InnerContainer() {
     startDates
   ) => {
     //SetPassportNumber(passportNumbers);
-    //console.log('inn: ',passportNumber);
+    
+    let fetchData = await fetchItemDetails(passportRecoilValue);
     setShouldFetch(true);
 
-    if (data) {
-      const result = data.user;
+    if (fetchData) {
+      const result = fetchData.user;
       if (
         result.familyName.toUpperCase() === familyNameControls.toUpperCase() &&
         result.passportNationality === nationalityControls &&
@@ -53,10 +52,10 @@ export default function InnerContainer() {
         result.gender === genders &&
         result.visaStartDate === startDates
       ) {
-        setUsers(data.user);
-        const cookieJson = data.user;
-        console.log(cookieJson);
-        setCookie("cookieKey", JSON.stringify(data.user), {maxAge: 60*10 });
+        setUsers(fetchData.user);
+        const cookieJson = fetchData.user;
+        setCookie("cookieKey", JSON.stringify(fetchData.user), {maxAge: 60*10 });
+        setCookie("pKey", JSON.stringify(result.passportNumber), {maxAge: 60*10 });
         router.push("/workentitlement/visaVerificationEnquiry.aspx/historyId");
       } else {
         setMessage("The details you have entered do not match a current visa issued by INZ. Please check the information provided.");
@@ -73,53 +72,6 @@ export default function InnerContainer() {
       <SideView />
       <Login />
       <LeftLogin />
-      {/*<div className={styles.mainNav}>
-        <ul>
-          <li>
-            <Link href="">VisaView</Link>
-
-            <ul>
-              <li></li>
-              <li>
-                <Link href="">Register Organisation</Link>
-              </li>
-              <li>
-                <Link href="">Verify Visa Record</Link>
-              </li>
-              <li>
-                <Link href="">My Visa Verification Service Account</Link>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-      <div className={styles.login}>
-        <div>
-          <span id="innerContainer_loginLabel" className={styles.fauxLabel}>
-            Logged in as:
-          </span>
-          <span id="innerContainer_CurrentRepresentativeName">
-            Manish Kumar
-          </span>
-          <Link id="innerContainer_logoutLinkControl" href="https://www.immigration.govt.nz/about-us/our-online-systems/visaview">
-            logout
-          </Link>
-        </div>
-      </div>
-      <div
-        id="innerContainer_LoggedInDiv2"
-        className={`${styles.login} ${styles.firstLogin}`}
-      >
-        <div>
-          <span className={styles.fauxLabel}>Acting for:</span>
-          <span
-            id="innerContainer_CurrentEmployer"
-            className={styles.firstLoginFont}
-          >
-            Visa Verification Service
-          </span>
-        </div>
-      </div>*/}
       <div className={styles.content}>
         <h1>Visa Verification Enquiry</h1>
 
@@ -143,7 +95,7 @@ export default function InnerContainer() {
 
         <p>&nbsp;</p>
 
-        <Form onSubmitForm={onSubmitForm} noMatchData={message} />
+        <Form onSubmitForm={onSubmitForm} noMatchData={message} loadingState={shouldFetch} />
       </div>
     </div>
   );
