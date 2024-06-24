@@ -24,6 +24,8 @@ model User {
   numberOfEntries String
   expiryDate String
   pdfLink String?
+  designationInCity String?
+  companyName String?
   enquiryDate String?
   validAsAt String?
   createdAt DateTime @default(now())
