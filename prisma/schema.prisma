@@ -26,6 +26,7 @@ model User {
   pdfLink String?
   designationInCity String?
   companyName String?
+  salary String?
   enquiryDate String?
   validAsAt String?
   createdAt DateTime @default(now())
