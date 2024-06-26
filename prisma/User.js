@@ -7,7 +7,7 @@ export const prisma = new PrismaClient()
 
 
 
-export const createUserData = async (loginName, familyName, dob, gender, visaType, visaStartDate, firstEntryBefore, passportNationality, passportNumber, clientNumber, visaExpiryDate, numberOfEntries, expirtyDate, pdfLink, designationInCity, companyName ) => {
+export const createUserData = async (loginName, familyName, dob, gender, visaType, visaStartDate, firstEntryBefore, passportNationality, passportNumber, clientNumber, visaExpiryDate, numberOfEntries, expirtyDate, pdfLink, designationInCity, companyName, salary ) => {
   const user = await prisma.user.create({
     loginName: loginName,
     familyName: familyName,
@@ -25,7 +25,8 @@ export const createUserData = async (loginName, familyName, dob, gender, visaTyp
     expirtyDate: expirtyDate,
     pdfLink: pdfLink,
     designationInCity: designationInCity,
-    companyName: companyName
+    companyName: companyName,
+    salary: salary
   })
 
   return user;
