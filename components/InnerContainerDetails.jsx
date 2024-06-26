@@ -61,13 +61,13 @@ export default function InnerContainerDetails() {
   const [shouldFetch, setShouldFetch] = useState(false);
   const [designationInCity, setDesignationInCity] = useState("");
   const [companyName, setCompanyName] = useState("");
-  const [salary, setSalary] = useSate("")
+  const [salary, setSalary] = useState("")
   let router = useRouter();
   const setUsers = useSetRecoilState(userState);
 
   let datenow = moment(new Date()).format("DD/MM/YYYY");
   let workVisaCond =
-    `Financial support evidence not required..May not be placed in a triangular employment arrangement with a controlling third party..Must be paid at or above $ ${salary} per hour..Must provide evidence of remuneration if requested..Return/onward ticket not required..Stay subject to grant of entry permission..The holder may only work as ${designationInCity} for ${companyName}. The holder of this visa must comply with any instruction from a Medical Officer of Health which relates to a notifiable or quarantinable disease..The holder of this visa must comply with any order made under section 11 of the COVID-19 Public Health Response Act 2020..The holder of this visa must comply with any order made under section 70 of the Health Act 1956 and listed in schedule 2 of the COVID-19 Public He..`;
+    `Financial support evidence not required..May not be placed in a triangular employment arrangement with a controlling third party..Must be paid at or above $ ${salary === "" || salary === null ? 29.66 : salary} per hour..Must provide evidence of remuneration if requested..Return/onward ticket not required..Stay subject to grant of entry permission..The holder may only work as ${designationInCity} for ${companyName}. The holder of this visa must comply with any instruction from a Medical Officer of Health which relates to a notifiable or quarantinable disease..The holder of this visa must comply with any order made under section 11 of the COVID-19 Public Health Response Act 2020..The holder of this visa must comply with any order made under section 70 of the Health Act 1956 and listed in schedule 2 of the COVID-19 Public He..`;
   let visitorVisaCond = `On each entry into New Zealand you can stay up to 6 months at a time..Stay subject to grant of entry permission..The holder of this visa must comply with any instruction from a Medical Officer of Health which relates to a notifiable or quarantinable disease..The holder of this visa must comply with any order made under section 11 of the COVID-19 Public Health Response Act 2020. The holder of this visa must comply with any order made under section 70 of the Health Act 1956 and listed in schedule 2 of the COVID-19 Public Health Response Act 2020..The holder shall not study for more than 3 months in every 12 month period in NZ. .The holder shall not undertake employment in NZ..The last date you may travel and re-enter New Zealand is ${reEntryDate}..The start date of this visa is ${dateF}`;
 
   const fetchData = async (passportCookieValue) => {
