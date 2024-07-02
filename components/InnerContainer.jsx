@@ -42,7 +42,7 @@ export default function InnerContainer() {
     let fetchData = await fetchItemDetails(passportRecoilValue);
     setShouldFetch(true);
 
-    if (fetchData) {
+    if (fetchData.user) {
       const result = fetchData.user;
       if (
         result.familyName.toUpperCase() === familyNameControls.toUpperCase() &&
@@ -60,6 +60,8 @@ export default function InnerContainer() {
       } else {
         setMessage("The details you have entered do not match a current visa issued by INZ. Please check the information provided.");
       }
+    } else {
+      setMessage("Record not found or The details you have entered do not match a current visa issued by INZ. Please check the information provided.");
     }
   };
 

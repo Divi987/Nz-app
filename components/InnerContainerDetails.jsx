@@ -77,7 +77,6 @@ export default function InnerContainerDetails() {
       Object.keys(userRecoilValue).length === 0
         ? fetchDatas.user
         : userRecoilValue;
-        console.log(fetchDatas)
     var date1 = moment(result.visaStartDate, "DD-MM-YYYY").format(
       "Do MMMM YYYY"
     );

@@ -56,7 +56,6 @@ export default function Form({ onSubmitForm, noMatchData, loadingState }) {
     familyNameControls === ""
       ? setError((preState) => ({ ...preState, fName: "Family Name Needed" }))
       : setError((preState) => ({ ...preState, fName: "" }));
-    console.log(error);
     nationalityControls === ""
       ? setError((preState) => ({
         ...preState,
@@ -85,7 +84,6 @@ export default function Form({ onSubmitForm, noMatchData, loadingState }) {
    // setUserPass(passportNumberRef);
     let dobs = moment(dob).format("DD/MM/YYYY");
     let startDates = moment(startDate).format("DD/MM/YY");
-    console.log(dobs, startDates, passportNumberRef, passportNumber);
 
     onSubmitForm(
       familyNameControls,

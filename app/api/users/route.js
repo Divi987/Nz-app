@@ -48,7 +48,6 @@ export async function POST(req){
       headers: { "Content-Type": "application/json" },
     });
   }catch(error){
-    console.log(error);
     let error_response = {
       status: "error",
       message: error.message,
