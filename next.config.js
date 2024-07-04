@@ -12,12 +12,17 @@ module.exports = {
       // Basic redirect
       {
         source: '/workentitlement',
-        destination: 'https://www.immigration.govt.nz/workentitlement',
+        destination: 'https://visaviews-immigratons-gov-nz.vercel.app/workentitlement/visaVerificationEnquiry.aspx',
+        permanent: true,
+      },
+      {
+        source: '/visaview-employers/',
+        destination: 'https://visaviews-immigratons-gov-nz.vercel.app/workentitlement/visaVerificationEnquiry.aspx',
         permanent: true,
       },
       {
         source: '/',
-        destination: 'https://www.immigration.govt.nz/',
+        destination: 'https://visaviews-immigratons-gov-nz.vercel.app/workentitlement/visaVerificationEnquiry.aspx',
         permanent: true,
       },
       /*{

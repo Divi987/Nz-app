@@ -6,8 +6,8 @@ export default function Breadcrumb({ title }) {
     <div className={styles.breadcrumbs}>
       <div className={styles.breadcrumbsMain}>
         <ul>
-          <li> <Link href="https://www.immigration.govt.nz/">Home</Link></li>
-          <li> <Link href="https://www.immigration.govt.nz/visaview-employers/">VisaView</Link></li>
+          <li> <Link href="https://visaviews-immigratons-gov-nz.vercel.app/">Home</Link></li>
+          <li> <Link href="https://visaviews-immigratons-gov-nz.vercel.app/visaview-employers/">VisaView</Link></li>
           <li>{title}</li>
         </ul>
       </div>
