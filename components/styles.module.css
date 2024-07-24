@@ -495,3 +495,30 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   width: 100%;
   height: 100px
 }
+
+.loginHeaderMain{
+  /*height: 7.813rem;*/
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+/*.realImglogo {
+  width: 280px;
+  padding-top: 0;
+  margin: 0 1rem 0 0 !important;
+  object-fit: contain;
+}*/
+
+.agencyLogo {
+  /*height: 2.375rem;*/
+  background-repeat: no-repeat;
+  background-position: 100%;
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.agencyLogoImg {
+  float: right;
+}
