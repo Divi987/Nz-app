@@ -522,3 +522,32 @@ li.last, li.last a, li.last a:link, li.last a:visited {
 .agencyLogoImg {
   float: right;
 }
+
+.footerLogin {
+  font-family: Inter !important;
+}
+
+.footerLogin .footerInnerL .footerNavL .a {
+  color: #fff;
+  display: block;
+  line-height: 2rem;
+  font-size: .8125rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footerLogin .footerInnerL .footerNavL .a:hover {
+  text-decoration: underline;
+  line-height: 2rem;
+}
+
+.footerLogin .copyright {
+  color: #fff;
+  font-size: .875rem;
+}
+
+.footerLogin hr {
+  border: .5px solid #fff;
+  margin: 1.625rem 0;
+  height: 0;
+}
