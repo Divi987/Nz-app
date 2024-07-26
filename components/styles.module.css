@@ -1,6 +1,5 @@
 .mainHeader {
   background: #0099cc;
-
 }
 
 .pageWrapper {
@@ -30,7 +29,9 @@
   margin-right: 15px;
 }
 
-.header a, .header a:link, .header a:visited {
+.header a,
+.header a:link,
+.header a:visited {
   color: #fff;
   font-weight: bold;
   text-decoration: none;
@@ -78,8 +79,9 @@
   margin-right: 3px;
 }
 
-.breadcrumbs a:link, .breadcrumbs a:visited {
-  background: url(../public/images/arrow-breadcrumb.gif) no-repeat right .4em;
+.breadcrumbs a:link,
+.breadcrumbs a:visited {
+  background: url(../public/images/arrow-breadcrumb.gif) no-repeat right 0.4em;
   color: #666;
   padding-right: 10px;
   text-decoration: underline;
@@ -87,7 +89,7 @@
 
 /* InnerContainer */
 
-.mainInnerContainer{
+.mainInnerContainer {
   margin: auto;
   width: 820px;
 }
@@ -104,7 +106,7 @@
 .mainNav {
   float: left;
   margin-top: 1em;
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
   width: 163px;
 }
 
@@ -114,12 +116,13 @@
   width: 153px;
 }
 
-.mainNav li{
+.mainNav li {
   float: left;
   list-style: none;
 }
 
-.mainNav a:link, .mainNav a:visited {
+.mainNav a:link,
+.mainNav a:visited {
   color: #0099cc;
   display: block;
   float: left;
@@ -130,12 +133,14 @@
   width: 135px;
 }
 
-.mainNav ul ul, .mainNav ul ul {
+.mainNav ul ul,
+.mainNav ul ul {
   margin: 0 0 0 10px;
   padding: 0;
 }
 
-.mainNav ul ul a:link, .mainNav ul ul a:visited {
+.mainNav ul ul a:link,
+.mainNav ul ul a:visited {
   background: url(../public/images/arrow.png) no-repeat 0 6px;
   color: #4d4d4d;
   font-size: 1em;
@@ -147,7 +152,7 @@
   border: 1px dashed #ccc;
   border-top: 0;
   float: right;
-  margin: 0 1em 0 .75em;
+  margin: 0 1em 0 0.75em;
   padding: 1em 0;
   width: 275px;
 }
@@ -166,7 +171,7 @@
 .login span {
   float: left;
   font-weight: bold;
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
   width: 11em;
   -ms-word-break: normal;
   -moz-word-break: normal;
@@ -176,7 +181,8 @@
   hyphens: auto;
 }
 
-.login a:link, .login a:visited {
+.login a:link,
+.login a:visited {
   color: #336699;
   float: right;
   position: relative;
@@ -191,7 +197,7 @@
 }
 
 .firstLogin span.fauxLabel {
-  width: 6.0em;
+  width: 6em;
 }
 
 .firstLogin .firstLoginFont {
@@ -200,7 +206,7 @@
 
 .content {
   float: right;
-  margin: 10px .5em 90px 0;
+  margin: 10px 0.5em 90px 0;
   position: relative;
   width: 590px;
 }
@@ -213,15 +219,14 @@
 }
 
 .content h2 {
-    float: left;
-    font-size: 1em;
-    margin: 1em 0 .5em;
-    width: 100%;
-    font-weight: 700;
+  float: left;
+  font-size: 1em;
+  margin: 1em 0 0.5em;
+  width: 100%;
+  font-weight: 700;
 }
 
-.content p
-{
+.content p {
   clear: both;
   margin-bottom: 1em;
   position: relative;
@@ -249,16 +254,21 @@
 .footer li {
   float: left;
   font-size: 1.1em;
-  line-height: .7;
+  line-height: 0.7;
   list-style: none;
   padding-bottom: 10px;
 }
 
-li.last, li.last a, li.last a:link, li.last a:visited {
+li.last,
+li.last a,
+li.last a:link,
+li.last a:visited {
   border: 0;
 }
 
-.footer a, .footer a:link, .footer a:visited {
+.footer a,
+.footer a:link,
+.footer a:visited {
   color: #4d4d4d;
   /* padding: 0 5px; */
   text-decoration: none;
@@ -291,32 +301,36 @@ li.last, li.last a, li.last a:link, li.last a:visited {
 
 .form .div {
   float: left;
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
   width: 100%;
 }
 
-.form label, .form span.fauxLabel {
+.form label,
+.form span.fauxLabel {
   color: #333;
   display: inline-block;
-  padding: .2em 0 .2em 2em;
+  padding: 0.2em 0 0.2em 2em;
   width: 14em;
 }
 
-.form label span, .form .fauxLabel span, span.mandatory {
+.form label span,
+.form .fauxLabel span,
+span.mandatory {
   color: #ff0000;
   float: none;
-  padding-left: .25em;
+  padding-left: 0.25em;
 }
 
 .form input {
-  margin-right: .25em;
+  margin-right: 0.25em;
   width: 18em;
   border: 1px solid #aaa;
   padding: 3px;
   border-radius: 3px;
 }
 
-.hasButton label, .hasButton select {
+.hasButton label,
+.hasButton select {
   float: left;
 }
 
@@ -379,21 +393,18 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   text-decoration: none;
 }
 
-.form .column
-{
+.form .column {
   float: left;
   width: 45%;
 }
 
-.form span
-{
+.form span {
   color: #336699;
   float: left;
-  padding: .2em 0;
+  padding: 0.2em 0;
 }
 
-.column span
-{
+.column span {
   width: 10em;
 }
 
@@ -406,8 +417,7 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   width: 100%;
 }*/
 
-.buttons input
-{
+.buttons input {
   border-style: none;
   border-color: inherit;
   border-width: 0;
@@ -426,14 +436,12 @@ li.last, li.last a, li.last a:link, li.last a:visited {
 
 /* Error */
 
-.error
-{
+.error {
   float: left;
   width: 100%;
 }
 
-.error ul
-{
+.error ul {
   background-color: #ffe1ff;
   clear: both;
   color: #ff0000;
@@ -442,8 +450,7 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   width: 90%;
 }
 
-.error li
-{
+.error li {
   list-style-type: circle;
 }
 
@@ -457,19 +464,19 @@ li.last, li.last a, li.last a:link, li.last a:visited {
 
 .form .datepicker {
   width: 8.5em !important;
-  margin-right: .25em;
+  margin-right: 0.25em;
 }
 
-.form .datepicker .datePickerwrapper{
+.form .datepicker .datePickerwrapper {
   width: 8.5em !important;
 }
 
 @keyframes placeHolderShimmer {
   0% {
-    background-position: -800px 0
+    background-position: -800px 0;
   }
   100% {
-    background-position: 800px 0
+    background-position: 800px 0;
   }
 }
 
@@ -493,10 +500,10 @@ li.last, li.last a, li.last a:link, li.last a:visited {
 
 .animatedBackgroundForVC {
   width: 100%;
-  height: 100px
+  height: 100px;
 }
 
-.loginHeaderMain{
+.loginHeaderMain {
   /*height: 7.813rem;*/
   display: flex;
   flex-flow: row nowrap;
@@ -531,7 +538,7 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   color: #fff;
   display: block;
   line-height: 2rem;
-  font-size: .8125rem;
+  font-size: 0.8125rem;
   text-decoration: none;
   font-weight: 600;
 }
@@ -543,11 +550,11 @@ li.last, li.last a, li.last a:link, li.last a:visited {
 
 .footerLogin .copyright {
   color: #fff;
-  font-size: .875rem;
+  font-size: 0.875rem;
 }
 
 .footerLogin hr {
-  border: .5px solid #fff;
+  border: 0.5px solid #fff;
   margin: 1.625rem 0;
   height: 0;
 }
