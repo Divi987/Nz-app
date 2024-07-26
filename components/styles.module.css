@@ -558,3 +558,211 @@ span.mandatory {
   margin: 1.625rem 0;
   height: 0;
 }
+
+/* Login Styles body part */
+.lcMian {
+  color: #000;
+  line-height: 1.5;
+  min-height: 100vh;
+  font-size: 0.938rem;
+}
+
+.lcForm .lcEntry {
+  position: relative;
+}
+
+.lcForm .lcEntryItem {
+  position: relative;
+}
+
+.lcForm .lcInput {
+  background-color: #f2f2f2 !important;
+  border: 1px solid #d1d1d1;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  color: #000;
+  font-family: Inter;
+  font-size: 0.938rem;
+  height: 3.25rem;
+  padding-left: 1rem;
+  width: 100%;
+}
+
+div.attrEntry > input[type="text"]:placeholder-shown:not(:focus) + label,
+div.attrEntry > input[type="password"]:placeholder-shown:not(:focus) + label,
+div.lcEntryItem > input[type="text"]:placeholder-shown:not(:focus) + label,
+div.lcEntryItem > input[type="password"]:placeholder-shown:not(:focus) + label {
+  font-size: 0.938rem;
+  top: 0.875rem;
+}
+
+div.attrEntry > select + label,
+div.attrEntry > input[type="text"] + label,
+div.attrEntry > input[type="password"] + label,
+div.lcEntryItem  > input[type="text"] + label,
+div.lcEntryItem > input[type="password"] + label {
+  position: absolute;
+  top: 0.1875rem;
+  left: 1rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  pointer-events: none;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+
+.lcBtn {
+  font-size: .9rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  display: inline-block;
+  border-radius: 1rem;
+  padding: .8rem 5rem .8rem 1rem;
+  text-align: left;
+  width: 15rem;
+  height: 3.25rem;
+  line-height: 1.6rem;
+  white-space: nowrap;
+  text-decoration: none !important;
+  vertical-align: middle;
+}
+
+.lcBtnIcon {
+  display: flex !important;
+}
+
+.lcBtnIcon section {
+  display: flex;
+}
+
+button.lcBtn.lcPrimary {
+  color: #fff;
+  background-color: #d64309;
+  border: none;
+}
+
+.lcBtn.lcPrimary {
+  color: #fff;
+  background-color: #d64309;
+  border: none;
+}
+
+.lcImgIcon {
+  width: 25px !important;
+  height: 25px !important;
+  margin-right: .6rem;
+}
+
+/* Banner Message */
+
+.lcBannerMessage {
+  font-family: Inter;
+  font-size: .938rem;
+  font-weight: 400;
+  background-color: #f2f2f2;
+  color: #4c4c4c;
+  display: flex;
+  flex-flow: column nowrap;
+  padding-top: .8125rem;
+  padding-bottom: .875rem;
+}
+
+.lcBannerMessage .innerLc {
+  font-size: .938rem;
+  /* max-width: 45rem; */
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0;
+}
+
+.lcBannerMessage .lcBackIcon {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  background-image: url(https://config.realme.govt.nz/b2c-ui/images/icons/left_arrow_Icon_RealMe.png);
+  background-size: 22px;
+  background-repeat: no-repeat;
+}
+
+.lcBannerMessage .lcReturnLink {
+  font-weight: 600;
+  padding-left: .9375rem;
+  margin-left: 1rem;
+}
+
+.lcBannerMessage .a {
+  color: #4c4c4c;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.lcBannerMessage .a:hover {
+  text-decoration: underline;
+}
+
+.rcBtn {
+  font-size: .9rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  display: inline-block;
+  border-radius: 1rem;
+  padding: .8rem 5rem .8rem 1rem;
+  text-align: left;
+  width: 15rem;
+  height: 3.25rem;
+  line-height: 1.6rem;
+  white-space: nowrap;
+  text-decoration: none !important;
+  vertical-align: middle;
+}
+
+.attributeList {
+  line-height: 1.5;
+}
+
+.attributeList ul.listStyleRedDot li {
+  list-style: none;
+  background: url(https://config.realme.govt.nz/b2c-ui/images/icons/bullet-points/red-disc.svg) no-repeat 0 .5rem;
+  padding-left: 1rem;
+}
+
+.rcInput {
+  background-color: #f2f2f2 !important;
+  border: 1px solid #d1d1d1;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  color: #000;
+  font-family: Inter;
+  font-size: 0.938rem;
+  height: 3.25rem;
+  padding-left: 1rem;
+  width: 100%;
+}
+
+div.attrEntry > input[type="text"]:placeholder-shown:not(:focus) + label,
+div.attrEntry > input[type="password"]:placeholder-shown:not(:focus) + label {
+  font-size: 0.938rem;
+  top: 0.875rem;
+}
+
+div.attrEntry > select + label,
+div.attrEntry > input[type="text"] + label,
+div.attrEntry > input[type="password"] + label {
+  position: absolute;
+  top: 0.1875rem;
+  left: 1rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  pointer-events: none;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
