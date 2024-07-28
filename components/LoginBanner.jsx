@@ -10,7 +10,7 @@ export default function LoginBanner() {
           id="realme-return-link"
           href="#"
           title="Go back to the Ministry of Business, Innovation and Employment"
-          tabindex="20"
+          tabIndex="20"
           className={`linkStopDoubleClick ${style.lcReturnLink} ${style.a} `}
           data-realmebaseurl="https://www.realme.govt.nz"
         >

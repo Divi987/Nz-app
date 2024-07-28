@@ -7,7 +7,7 @@ export default function LoginRadioInput() {
             name="select-split-panel"
             id="select-left"
           />
-          <label for="select-left" className="pl-6 text=[0.938rem]">
+          <label htmlFor="select-left" className="pl-6 text=[0.938rem]">
             I have an existing RealMe login
           </label>
         </li>
@@ -17,7 +17,7 @@ export default function LoginRadioInput() {
             name="select-split-panel"
             id="select-right"
           />
-          <label for="select-right" className="pl-6">I need to create a login</label>
+          <label htmlFor="select-right" className="pl-6">I need to create a login</label>
 
         </li>
       </ul>
