@@ -9,3 +9,8 @@ export const userPassport = atom({
     key: "userPassport",
     default: ''
 })
+
+export const userNameState = atom({
+  key: "userNameState",
+  default: {}
+})
