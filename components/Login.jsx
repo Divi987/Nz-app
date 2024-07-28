@@ -15,7 +15,7 @@ export default function Login(){
       console.log(hasCookieExp)
       if (!hasCookieExp) {
         deleteCookie("cookieUserName");
-        router.push("/");
+        router.push("/visas/login");
       } else {
         const userCookieValue = JSON.parse(userCookie);
         console.log(userCookieValue);

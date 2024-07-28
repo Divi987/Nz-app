@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         source: '/',
-        destination: '/login', //'https://visaviews-immigration-gov-nz.vercel.app/login',
+        destination: '/visas/login', //'https://visaviews-immigration-gov-nz.vercel.app/login',
         permanent: true,
       },
       /*{

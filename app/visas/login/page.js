@@ -3,7 +3,7 @@ import LoginFooter from "@/components/LoginFooter"
 import LoginHeader from "@/components/LoginHeader"
 import LoginContainer from "@/components/LoginContainer";
 import LoginBanner from "@/components/LoginBanner";
-import ico from '../../public/favicon.png';
+import ico from '../../../public/favicon.png';
 
 export const metadata = {
     title: "RealMe - Login",
