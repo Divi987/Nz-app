@@ -1,9 +1,103 @@
+"use client";
+
 import Link from "next/link";
 import style from "./styles.module.css";
+import { useRef, useState } from "react";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { userNameState } from "@/recoil/atoms/states";
+import { fetchUserLoginDetails } from "@/lib/api/fetchReq";
+import { userNameStateSelector } from "@/recoil/selectors/selectors";
+import { setCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 export default function LoginContainer() {
+  const userNameControl = useRef();
+  const passwordControl = useRef();
+  let router = useRouter();
+  const [message, setMessage] = useState("");
+  const [errorMisMatch, setErrorMisMatch] = useState("hidden");
+  const [error, setError] = useState({
+    uName: "",
+    passwordError: "",
+  });
+  const setUserName = useSetRecoilState(userNameState);
+  const setUserNameValue = useRecoilValue(userNameStateSelector);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const userNameControls = userNameControl.current.value;
+    const passwordControls = passwordControl.current.value;
+
+    //setUserName(userNameControls);
+    console.log(setUserNameValue);
+
+    userNameControls === ""
+      ? setError((preState) => ({
+          ...preState,
+          uName: "Please enter your Username",
+        }))
+      : setError((preState) => ({ ...preState, uName: "" }));
+    passwordControls === ""
+      ? setError((preState) => ({
+          ...preState,
+          passwordError: "Please enter your password",
+        }))
+      : setError((preState) => ({ ...preState, passwordError: "" }));
+
+    onSubmitForm(userNameControls, passwordControls);
+  };
+
+  const onSubmitForm = async (userNameControls, passwordControls) => {
+    const fetchData = await fetchUserLoginDetails(
+      `/register/${userNameControls}`
+    );
+
+    if (fetchData.registerUser) {
+      const result = fetchData.registerUser;
+
+      if (
+        result.userName === userNameControls &&
+        result.password === passwordControls
+      ) {
+        setUserName(result);
+        setCookie("cookieUserName", JSON.stringify(result.fName), {
+          maxAge: 60 * 10,
+        });
+        router.push("/workentitlement/visaVerificationEnquiry.aspx");
+      } else {
+        setErrorMisMatch("block");
+      }
+    } else {
+      setErrorMisMatch("block");
+    }
+  };
+
   return (
     <>
+      <div className={`bg-[#fcf3f3] ${errorMisMatch} text-[0.938rem] `}>
+        <div
+          className={`inner mx-5 md:mx-auto md:w-10/12 pt-[1.8125rem] pb-10 md:pr-14`}
+        >
+          <span
+            className="banner-message-icon bg-[url('https://config.realme.govt.nz/b2c-ui/images/icons/icon-error.svg')]"
+            style={{
+              bgImage:
+                "url('https://config.realme.govt.nz/b2c-ui/images/icons/icon-error.svg')",
+            }}
+          ></span>
+          <p className="leading-normal text-red-600 font-bold">
+            <span className="banner-message-title">
+              Your login attempt was unsuccessful.
+            </span>
+          </p>
+          <p className="leading-normal">
+            Please check your username or password.
+            <br />
+            If you are unable to log in, you can follow the "Forgot Username" or
+            "Forgot Password" link below.
+          </p>
+        </div>
+      </div>
       <div className={style.lcMain}>
         <div className="lcPage bg-white">
           <div className="lcInner mx-5 md:mx-auto md:w-10/12 pt-[1.8125rem] pb-10 md:pr-14">
@@ -42,7 +136,7 @@ export default function LoginContainer() {
                   </li>
                 </ul>
                 <div classNameName="lcFormMain">
-                  <form action="#" className={style.lcForm}>
+                  <form className={style.lcForm}>
                     <div className={style.lcEntry}>
                       <div className={style.lcEntryItem}>
                         <input
@@ -50,17 +144,16 @@ export default function LoginContainer() {
                           id="signInName"
                           name="Username"
                           placeholder=" "
-                          value=""
-                          className={`${style.lcControl} ${style.lcInput}`}
+                          ref={userNameControl}
+                          className={`font-['inherit'] ${style.lcControl} ${style.lcInput}`}
                         />
                         <label for="signInName">Username</label>
                         <div
                           className="error itemLevel"
                           aria-hidden="true"
                           role="alert"
-                          style={{ display: "none" }}
                         >
-                          <p></p>
+                          <p>{error.uName}</p>
                         </div>
                       </div>
                       <div className={`${style.lcEntryItem} mt-4`}>
@@ -71,15 +164,12 @@ export default function LoginContainer() {
                           id="password"
                           name="Password"
                           placeholder=" "
+                          ref={passwordControl}
                           className={`${style.lcControl} ${style.lcInput}`}
                         />
                         <label for="password">Password</label>
-                        <div
-                          className="error itemLevel"
-                          aria-hidden="true"
-                          style={{ display: "none" }}
-                        >
-                          <p role="alert"></p>
+                        <div className="error itemLevel" aria-hidden="true">
+                          <p role="alert">{error.passwordError}</p>
                         </div>
                         <div
                           id="capsLockMessage"
@@ -99,6 +189,7 @@ export default function LoginContainer() {
                           id="next"
                           type="submit"
                           form="localAccountForm"
+                          onClick={handleSubmit}
                           className={`${style.lcBtn} ${style.lcPrimary} ${style.lcBtnIcon}`}
                         >
                           <section>
@@ -114,6 +205,23 @@ export default function LoginContainer() {
                     </div>
                   </form>
                 </div>
+                <div id="forgotUsernamePassword" className={`${style.forgotUNP} font-normal mt-6 text-[0.938rem]`}>
+                  <button
+                    className={`${style.accountButton} firstButton claims-provider-selection`}
+                    id="LocalAccountForgotUsernameExchange"
+                    fdprocessedid="nkdi77"
+                  >
+                    Forgot Username
+                  </button>
+                  <span> or </span>
+                  <button
+                    className={`${style.accountButton} claims-provider-selection`}
+                    id="LocalAccountForgotPasswordExchange"
+                    fdprocessedid="go44s7"
+                  >
+                    Forgot Password?
+                  </button>
+                </div>
               </div>
               <div className="splitPageRight md:w-6/12 hidden md:block md:pl-20 border-l-[1px] border-[#d1d1d1]">
                 <div>
@@ -122,13 +230,28 @@ export default function LoginContainer() {
                       Create a <b className="font-extrabold">RealMe </b>
                       login
                     </h2>
-                    <p className="details my-6 hideInMobile font-normal text-[0.938rem]">To access this service you need a RealMe login.</p>
-                    <p className=" font-normal text-[0.938rem]">You'll be able to access a range of services with a single username and password. RealMe is designed to protect your privacy and security.</p>
+                    <p className="details my-6 hideInMobile font-normal text-[0.938rem]">
+                      To access this service you need a RealMe login.
+                    </p>
+                    <p className=" font-normal text-[0.938rem]">
+                      You'll be able to access a range of services with a single
+                      username and password. RealMe is designed to protect your
+                      privacy and security.
+                    </p>
                   </div>
                   <div className="createButtonHolder">
-                  <Link id="createAccount" href="#" className={`${style.lcBtn} ${style.lcPrimary} ${style.lcBtnIcon}`}>
-                  <img src="https://config.realme.govt.nz/b2c-ui/images/icons/Right_Arrow_Icon_RealMe.png" alt="Right Arrow" className={style.lcImgIcon} />
-                  <span>Create a RealMe login</span></Link>
+                    <Link
+                      id="createAccount"
+                      href="#"
+                      className={`${style.lcBtn} ${style.lcPrimary} ${style.lcBtnIcon}`}
+                    >
+                      <img
+                        src="https://config.realme.govt.nz/b2c-ui/images/icons/Right_Arrow_Icon_RealMe.png"
+                        alt="Right Arrow"
+                        className={style.lcImgIcon}
+                      />
+                      <span>Create a RealMe login</span>
+                    </Link>
                   </div>
                 </div>
               </div>

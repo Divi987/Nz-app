@@ -747,7 +747,7 @@ button.lcBtn.lcPrimary {
   width: 100%;
 }
 
-div.attrEntry > input[type="text"]:placeholder-shown:not(:focus) + label,
+/* div.attrEntry > input[type="text"]:placeholder-shown:not(:focus) + label,
 div.attrEntry > input[type="password"]:placeholder-shown:not(:focus) + label {
   font-size: 0.938rem;
   top: 0.875rem;
@@ -765,4 +765,36 @@ div.attrEntry > input[type="password"] + label {
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
+} */
+div.attrEntry {
+  position: relative;
+}
+
+div.attrEntry>input[type=text]:placeholder-shown:not(:focus)+label, div.attrEntry>input[type=password]:placeholder-shown:not(:focus)+label, div.entry-item>input[type=text]:placeholder-shown:not(:focus)+label, div.entry-item>input[type=password]:placeholder-shown:not(:focus)+label {
+  font-size: .938rem;
+  top: .875rem;
+}
+div.attrEntry>select+label, div.attrEntry>input[type=text]+label, div.attrEntry>input[type=password]+label, div.entry-item>input[type=text]+label, div.entry-item>input[type=password]+label {
+  position: absolute;
+  top: .1875rem;
+  left: 1rem;
+  font-size: .75rem;
+  font-weight: 400;
+  pointer-events: none;
+  transition: .2s ease all;
+  -moz-transition: .2s ease all;
+  -webkit-transition: .2s ease all;
+}
+
+.forgotUNP .accountButton {
+  display: inline;
+  font-family: inter;
+  color: #d64309;
+  font-weight: 400;
+  text-decoration: none;
+  background: 0 0 !important;
+  border: none;
+  padding: 0 !important;
+  cursor: pointer;
+  font-size: 100%;
 }
