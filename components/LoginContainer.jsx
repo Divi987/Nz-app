@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 export default function LoginContainer() {
   const userNameControl = useRef();
   const passwordControl = useRef();
+  const [shouldFetch, setShouldFetch] = useState(false);
   let router = useRouter();
   const [message, setMessage] = useState("");
   const [errorMisMatch, setErrorMisMatch] = useState("hidden");
@@ -29,7 +30,9 @@ export default function LoginContainer() {
     const passwordControls = passwordControl.current.value;
 
     //setUserName(userNameControls);
-    console.log(setUserNameValue);
+    if (userNameControls !== "" && passwordControls !== "") {
+      onSubmitForm(userNameControls, passwordControls) 
+    } 
 
     userNameControls === ""
       ? setError((preState) => ({
@@ -43,14 +46,13 @@ export default function LoginContainer() {
           passwordError: "Please enter your password",
         }))
       : setError((preState) => ({ ...preState, passwordError: "" }));
-
-    onSubmitForm(userNameControls, passwordControls);
   };
 
   const onSubmitForm = async (userNameControls, passwordControls) => {
     const fetchData = await fetchUserLoginDetails(
       `/register/${userNameControls}`
     );
+    setShouldFetch(true);
 
     if (fetchData.registerUser) {
       const result = fetchData.registerUser;
@@ -66,9 +68,11 @@ export default function LoginContainer() {
         router.push("/workentitlement/visaVerificationEnquiry.aspx");
       } else {
         setErrorMisMatch("block");
+        setShouldFetch(false);
       }
     } else {
       setErrorMisMatch("block");
+      setShouldFetch(false);
     }
   };
 
@@ -79,14 +83,10 @@ export default function LoginContainer() {
           className={`inner mx-5 md:mx-auto md:w-10/12 pt-[1.8125rem] pb-10 md:pr-14`}
         >
           <span
-            className="banner-message-icon bg-[url('https://config.realme.govt.nz/b2c-ui/images/icons/icon-error.svg')]"
-            style={{
-              bgImage:
-                "url('https://config.realme.govt.nz/b2c-ui/images/icons/icon-error.svg')",
-            }}
+            className={`${style.bannerMessageIcon}`}
           ></span>
-          <p className="leading-normal text-red-600 font-bold">
-            <span className="banner-message-title">
+          <p className="leading-normal text-red-600 font-bold ml-8 mb-2">
+            <span className="banner-message-title ">
               Your login attempt was unsuccessful.
             </span>
           </p>
@@ -120,7 +120,7 @@ export default function LoginContainer() {
                       name="select-split-panel"
                       id="select-left"
                     />
-                    <label for="select-left" className="pl-6 text=[0.938rem]">
+                    <label htmlFor="select-left" className="pl-6 text=[0.938rem]">
                       I have an existing RealMe login
                     </label>
                   </li>
@@ -130,13 +130,13 @@ export default function LoginContainer() {
                       name="select-split-panel"
                       id="select-right"
                     />
-                    <label for="select-right" className="pl-6">
+                    <label htmlFor="select-right" className="pl-6">
                       I need to create a login
                     </label>
                   </li>
                 </ul>
-                <div classNameName="lcFormMain">
-                  <form className={style.lcForm}>
+                <div className="lcFormMain">
+                  <form className={style.lcForm} onSubmit={handleSubmit}>
                     <div className={style.lcEntry}>
                       <div className={style.lcEntryItem}>
                         <input
@@ -147,13 +147,13 @@ export default function LoginContainer() {
                           ref={userNameControl}
                           className={`font-['inherit'] ${style.lcControl} ${style.lcInput}`}
                         />
-                        <label for="signInName">Username</label>
+                        <label htmlFor="signInName">Username</label>
                         <div
                           className="error itemLevel"
                           aria-hidden="true"
                           role="alert"
                         >
-                          <p>{error.uName}</p>
+                          <p className="text-[0.938rem] text-[#c70000]">{error.uName}</p>
                         </div>
                       </div>
                       <div className={`${style.lcEntryItem} mt-4`}>
@@ -167,9 +167,9 @@ export default function LoginContainer() {
                           ref={passwordControl}
                           className={`${style.lcControl} ${style.lcInput}`}
                         />
-                        <label for="password">Password</label>
+                        <label htmlFor="password">Password</label>
                         <div className="error itemLevel" aria-hidden="true">
-                          <p role="alert">{error.passwordError}</p>
+                          <p role="alert" className="text-[0.938rem] text-[#c70000]">{error.passwordError}</p>
                         </div>
                         <div
                           id="capsLockMessage"
@@ -180,8 +180,8 @@ export default function LoginContainer() {
                         </div>
                       </div>
                       <div
-                        className="working"
-                        style={{ display: "none" }}
+                        className={shouldFetch ? `${style.working} block` : 'hidden'}
+                        // style={{ display: "none" }}
                       ></div>
 
                       <div className="buttons">
@@ -207,9 +207,9 @@ export default function LoginContainer() {
                 </div>
                 <div id="forgotUsernamePassword" className={`${style.forgotUNP} font-normal mt-6 text-[0.938rem]`}>
                   <button
-                    className={`${style.accountButton} firstButton claims-provider-selection`}
+                    className={`${style.accountButton} firstButton claims-provider-selection `}
                     id="LocalAccountForgotUsernameExchange"
-                    fdprocessedid="nkdi77"
+                    
                   >
                     Forgot Username
                   </button>
@@ -217,7 +217,7 @@ export default function LoginContainer() {
                   <button
                     className={`${style.accountButton} claims-provider-selection`}
                     id="LocalAccountForgotPasswordExchange"
-                    fdprocessedid="go44s7"
+                   
                   >
                     Forgot Password?
                   </button>
@@ -242,7 +242,7 @@ export default function LoginContainer() {
                   <div className="createButtonHolder">
                     <Link
                       id="createAccount"
-                      href="#"
+                      href="/register"
                       className={`${style.lcBtn} ${style.lcPrimary} ${style.lcBtnIcon}`}
                     >
                       <img
