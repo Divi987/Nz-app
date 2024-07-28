@@ -1,6 +1,5 @@
 .mainHeader {
   background: #0099cc;
-
 }
 
 .pageWrapper {
@@ -30,7 +29,9 @@
   margin-right: 15px;
 }
 
-.header a, .header a:link, .header a:visited {
+.header a,
+.header a:link,
+.header a:visited {
   color: #fff;
   font-weight: bold;
   text-decoration: none;
@@ -78,8 +79,9 @@
   margin-right: 3px;
 }
 
-.breadcrumbs a:link, .breadcrumbs a:visited {
-  background: url(../public/images/arrow-breadcrumb.gif) no-repeat right .4em;
+.breadcrumbs a:link,
+.breadcrumbs a:visited {
+  background: url(../public/images/arrow-breadcrumb.gif) no-repeat right 0.4em;
   color: #666;
   padding-right: 10px;
   text-decoration: underline;
@@ -87,7 +89,7 @@
 
 /* InnerContainer */
 
-.mainInnerContainer{
+.mainInnerContainer {
   margin: auto;
   width: 820px;
 }
@@ -104,7 +106,7 @@
 .mainNav {
   float: left;
   margin-top: 1em;
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
   width: 163px;
 }
 
@@ -114,12 +116,13 @@
   width: 153px;
 }
 
-.mainNav li{
+.mainNav li {
   float: left;
   list-style: none;
 }
 
-.mainNav a:link, .mainNav a:visited {
+.mainNav a:link,
+.mainNav a:visited {
   color: #0099cc;
   display: block;
   float: left;
@@ -130,12 +133,14 @@
   width: 135px;
 }
 
-.mainNav ul ul, .mainNav ul ul {
+.mainNav ul ul,
+.mainNav ul ul {
   margin: 0 0 0 10px;
   padding: 0;
 }
 
-.mainNav ul ul a:link, .mainNav ul ul a:visited {
+.mainNav ul ul a:link,
+.mainNav ul ul a:visited {
   background: url(../public/images/arrow.png) no-repeat 0 6px;
   color: #4d4d4d;
   font-size: 1em;
@@ -147,7 +152,7 @@
   border: 1px dashed #ccc;
   border-top: 0;
   float: right;
-  margin: 0 1em 0 .75em;
+  margin: 0 1em 0 0.75em;
   padding: 1em 0;
   width: 275px;
 }
@@ -166,7 +171,7 @@
 .login span {
   float: left;
   font-weight: bold;
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
   width: 11em;
   -ms-word-break: normal;
   -moz-word-break: normal;
@@ -176,7 +181,8 @@
   hyphens: auto;
 }
 
-.login a:link, .login a:visited {
+.login a:link,
+.login a:visited {
   color: #336699;
   float: right;
   position: relative;
@@ -191,7 +197,7 @@
 }
 
 .firstLogin span.fauxLabel {
-  width: 6.0em;
+  width: 6em;
 }
 
 .firstLogin .firstLoginFont {
@@ -200,7 +206,7 @@
 
 .content {
   float: right;
-  margin: 10px .5em 90px 0;
+  margin: 10px 0.5em 90px 0;
   position: relative;
   width: 590px;
 }
@@ -213,15 +219,14 @@
 }
 
 .content h2 {
-    float: left;
-    font-size: 1em;
-    margin: 1em 0 .5em;
-    width: 100%;
-    font-weight: 700;
+  float: left;
+  font-size: 1em;
+  margin: 1em 0 0.5em;
+  width: 100%;
+  font-weight: 700;
 }
 
-.content p
-{
+.content p {
   clear: both;
   margin-bottom: 1em;
   position: relative;
@@ -249,16 +254,21 @@
 .footer li {
   float: left;
   font-size: 1.1em;
-  line-height: .7;
+  line-height: 0.7;
   list-style: none;
   padding-bottom: 10px;
 }
 
-li.last, li.last a, li.last a:link, li.last a:visited {
+li.last,
+li.last a,
+li.last a:link,
+li.last a:visited {
   border: 0;
 }
 
-.footer a, .footer a:link, .footer a:visited {
+.footer a,
+.footer a:link,
+.footer a:visited {
   color: #4d4d4d;
   /* padding: 0 5px; */
   text-decoration: none;
@@ -291,32 +301,36 @@ li.last, li.last a, li.last a:link, li.last a:visited {
 
 .form .div {
   float: left;
-  padding-bottom: .5em;
+  padding-bottom: 0.5em;
   width: 100%;
 }
 
-.form label, .form span.fauxLabel {
+.form label,
+.form span.fauxLabel {
   color: #333;
   display: inline-block;
-  padding: .2em 0 .2em 2em;
+  padding: 0.2em 0 0.2em 2em;
   width: 14em;
 }
 
-.form label span, .form .fauxLabel span, span.mandatory {
+.form label span,
+.form .fauxLabel span,
+span.mandatory {
   color: #ff0000;
   float: none;
-  padding-left: .25em;
+  padding-left: 0.25em;
 }
 
 .form input {
-  margin-right: .25em;
+  margin-right: 0.25em;
   width: 18em;
   border: 1px solid #aaa;
   padding: 3px;
   border-radius: 3px;
 }
 
-.hasButton label, .hasButton select {
+.hasButton label,
+.hasButton select {
   float: left;
 }
 
@@ -379,21 +393,18 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   text-decoration: none;
 }
 
-.form .column
-{
+.form .column {
   float: left;
   width: 45%;
 }
 
-.form span
-{
+.form span {
   color: #336699;
   float: left;
-  padding: .2em 0;
+  padding: 0.2em 0;
 }
 
-.column span
-{
+.column span {
   width: 10em;
 }
 
@@ -406,8 +417,7 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   width: 100%;
 }*/
 
-.buttons input
-{
+.buttons input {
   border-style: none;
   border-color: inherit;
   border-width: 0;
@@ -426,14 +436,12 @@ li.last, li.last a, li.last a:link, li.last a:visited {
 
 /* Error */
 
-.error
-{
+.error {
   float: left;
   width: 100%;
 }
 
-.error ul
-{
+.error ul {
   background-color: #ffe1ff;
   clear: both;
   color: #ff0000;
@@ -442,8 +450,7 @@ li.last, li.last a, li.last a:link, li.last a:visited {
   width: 90%;
 }
 
-.error li
-{
+.error li {
   list-style-type: circle;
 }
 
@@ -457,19 +464,19 @@ li.last, li.last a, li.last a:link, li.last a:visited {
 
 .form .datepicker {
   width: 8.5em !important;
-  margin-right: .25em;
+  margin-right: 0.25em;
 }
 
-.form .datepicker .datePickerwrapper{
+.form .datepicker .datePickerwrapper {
   width: 8.5em !important;
 }
 
 @keyframes placeHolderShimmer {
   0% {
-    background-position: -800px 0
+    background-position: -800px 0;
   }
   100% {
-    background-position: 800px 0
+    background-position: 800px 0;
   }
 }
 
@@ -493,5 +500,347 @@ li.last, li.last a, li.last a:link, li.last a:visited {
 
 .animatedBackgroundForVC {
   width: 100%;
-  height: 100px
+  height: 100px;
+}
+
+.loginHeaderMain {
+  /*height: 7.813rem;*/
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+/*.realImglogo {
+  width: 280px;
+  padding-top: 0;
+  margin: 0 1rem 0 0 !important;
+  object-fit: contain;
+}*/
+
+.agencyLogo {
+  /*height: 2.375rem;*/
+  background-repeat: no-repeat;
+  background-position: 100%;
+  flex: 1 0 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.agencyLogoImg {
+  float: right;
+}
+
+.footerLogin {
+  font-family: Inter !important;
+}
+
+.footerLogin .footerInnerL .footerNavL .a {
+  color: #fff;
+  display: block;
+  line-height: 2rem;
+  font-size: 0.8125rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footerLogin .footerInnerL .footerNavL .a:hover {
+  text-decoration: underline;
+  line-height: 2rem;
+}
+
+.footerLogin .copyright {
+  color: #fff;
+  font-size: 0.875rem;
+}
+
+.footerLogin hr {
+  border: 0.5px solid #fff;
+  margin: 1.625rem 0;
+  height: 0;
+}
+
+/* Login Styles body part */
+.lcMian {
+  color: #000;
+  line-height: 1.5;
+  min-height: 100vh;
+  font-size: 0.938rem;
+}
+
+.lcForm .lcEntry {
+  position: relative;
+}
+
+.lcForm .lcEntryItem {
+  position: relative;
+}
+
+.lcForm .lcInput {
+  background-color: #f2f2f2 !important;
+  border: 1px solid #d1d1d1;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  color: #000;
+  font-family: Inter;
+  font-size: 0.938rem;
+  height: 3.25rem;
+  padding-left: 1rem;
+  width: 100%;
+}
+
+div.attrEntry > input[type="text"]:placeholder-shown:not(:focus) + label,
+div.attrEntry > input[type="password"]:placeholder-shown:not(:focus) + label,
+div.lcEntryItem > input[type="text"]:placeholder-shown:not(:focus) + label,
+div.lcEntryItem > input[type="password"]:placeholder-shown:not(:focus) + label {
+  font-size: 0.938rem;
+  top: 0.875rem;
+}
+
+div.attrEntry > select + label,
+div.attrEntry > input[type="text"] + label,
+div.attrEntry > input[type="password"] + label,
+div.lcEntryItem  > input[type="text"] + label,
+div.lcEntryItem > input[type="password"] + label {
+  position: absolute;
+  top: 0.1875rem;
+  left: 1rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  pointer-events: none;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+
+.lcBtn {
+  font-size: .9rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  display: inline-block;
+  border-radius: 1rem;
+  padding: .8rem 5rem .8rem 1rem;
+  text-align: left;
+  width: 15rem;
+  height: 3.25rem;
+  line-height: 1.6rem;
+  white-space: nowrap;
+  text-decoration: none !important;
+  vertical-align: middle;
+}
+
+.lcBtnIcon {
+  display: flex !important;
+}
+
+.lcBtnIcon section {
+  display: flex;
+}
+
+button.lcBtn.lcPrimary {
+  color: #fff;
+  background-color: #d64309;
+  border: none;
+}
+
+.lcBtn.lcPrimary {
+  color: #fff;
+  background-color: #d64309;
+  border: none;
+}
+
+.lcImgIcon {
+  width: 25px !important;
+  height: 25px !important;
+  margin-right: .6rem;
+}
+
+/* Banner Message */
+
+.lcBannerMessage {
+  font-family: Inter;
+  font-size: .938rem;
+  font-weight: 400;
+  background-color: #f2f2f2;
+  color: #4c4c4c;
+  display: flex;
+  flex-flow: column nowrap;
+  padding-top: .8125rem;
+  padding-bottom: .875rem;
+}
+
+.lcBannerMessage .innerLc {
+  font-size: .938rem;
+  /* max-width: 45rem; */
+  display: flex;
+  align-items: center;
+  padding: 0.6rem 0;
+}
+
+.lcBannerMessage .lcBackIcon {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: 0;
+  width: 1.6rem;
+  height: 1.6rem;
+  background-image: url(https://config.realme.govt.nz/b2c-ui/images/icons/left_arrow_Icon_RealMe.png);
+  background-size: 22px;
+  background-repeat: no-repeat;
+}
+
+.lcBannerMessage .lcReturnLink {
+  font-weight: 600;
+  padding-left: .9375rem;
+  margin-left: 1rem;
+}
+
+.lcBannerMessage .a {
+  color: #4c4c4c;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.lcBannerMessage .a:hover {
+  text-decoration: underline;
+}
+
+.rcBtn {
+  font-size: .9rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  display: inline-block;
+  border-radius: 1rem;
+  padding: .8rem 5rem .8rem 1rem;
+  text-align: left;
+  width: 15rem;
+  height: 3.25rem;
+  line-height: 1.6rem;
+  white-space: nowrap;
+  text-decoration: none !important;
+  vertical-align: middle;
+}
+
+.attributeList {
+  line-height: 1.5;
+}
+
+.attributeList ul.listStyleRedDot li {
+  list-style: none;
+  background: url(https://config.realme.govt.nz/b2c-ui/images/icons/bullet-points/red-disc.svg) no-repeat 0 .5rem;
+  padding-left: 1rem;
+}
+
+.rcInput {
+  background-color: #f2f2f2 !important;
+  border: 1px solid #d1d1d1;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  color: #000;
+  font-family: Inter;
+  font-size: 0.938rem;
+  height: 3.25rem;
+  padding-left: 1rem;
+  width: 100%;
+}
+
+/* div.attrEntry > input[type="text"]:placeholder-shown:not(:focus) + label,
+div.attrEntry > input[type="password"]:placeholder-shown:not(:focus) + label {
+  font-size: 0.938rem;
+  top: 0.875rem;
+}
+
+div.attrEntry > select + label,
+div.attrEntry > input[type="text"] + label,
+div.attrEntry > input[type="password"] + label {
+  position: absolute;
+  top: 0.1875rem;
+  left: 1rem;
+  font-size: 0.75rem;
+  font-weight: 400;
+  pointer-events: none;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+} */
+div.attrEntry {
+  position: relative;
+}
+
+div.attrEntry>input[type=text]:placeholder-shown:not(:focus)+label, div.attrEntry>input[type=password]:placeholder-shown:not(:focus)+label, div.entry-item>input[type=text]:placeholder-shown:not(:focus)+label, div.entry-item>input[type=password]:placeholder-shown:not(:focus)+label {
+  font-size: .938rem;
+  top: .875rem;
+}
+div.attrEntry>select+label, div.attrEntry>input[type=text]+label, div.attrEntry>input[type=password]+label, div.entry-item>input[type=text]+label, div.entry-item>input[type=password]+label {
+  position: absolute;
+  top: .1875rem;
+  left: 1rem;
+  font-size: .75rem;
+  font-weight: 400;
+  pointer-events: none;
+  transition: .2s ease all;
+  -moz-transition: .2s ease all;
+  -webkit-transition: .2s ease all;
+}
+
+ul.listStyleRedDot li {
+  list-style: none;
+  background: url(https://config.realme.govt.nz/b2c-ui/images/icons/bullet-points/red-disc.svg) no-repeat 0 .5rem;
+  padding-left: 1rem;
+}
+
+.forgotUNP .accountButton {
+  display: inline;
+  font-family: inter;
+  color: #d64309;
+  font-weight: 400;
+  text-decoration: none;
+  background: 0 0 !important;
+  border: none;
+  padding: 0 !important;
+  cursor: pointer;
+  font-size: 100%;
+}
+
+.forgotUNP .accountButton:hover {
+  text-decoration: underline;
+}
+
+.working {
+  background: url(data:image/gif;base64,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) no-repeat;
+  background-image: url(data:image/gif;base64,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);
+  background-position-x: center;
+  background-position-y: bottom;
+  background-size: initial;
+  background-repeat: no-repeat;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  height: 30px;
+  width: auto;
+  background-position: 50% 100%;
+}
+
+.bannerMessageIcon {
+  background-image: url('https://config.realme.govt.nz/b2c-ui/images/icons/icon-error.svg');
+  position: absolute;
+    display: block;
+    font: 0 / 0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+    background-repeat: no-repeat;
+    background-position: 0;
+    width: 1.5rem;
+    height: 1.8rem;
+}
+
+.lcMain input {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 1rem !important;
 }
