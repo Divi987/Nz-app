@@ -8,6 +8,11 @@ export default function Login(){
   let router = useRouter();
   const [userName, setUserName] = useState('');
 
+  const handleLogout = () => {
+    deleteCookie("cookieUserName");
+    router.push("/visas/login");
+  }
+
   useEffect(() => {
       const userCookie = getCookie("cookieUserName");
     
@@ -31,7 +36,7 @@ export default function Login(){
           <span id="innerContainer_CurrentRepresentativeName">
            {userName === "" ? 'Manish Kumar' : userName}
           </span>
-          <Link id="innerContainer_logoutLinkControl" href="https://www.immigration.govt.nz/about-us/our-online-systems/visaview">
+          <Link id="innerContainer_logoutLinkControl" href="/visas/login" onClick={handleLogout}>
             logout
           </Link>
         </div>
